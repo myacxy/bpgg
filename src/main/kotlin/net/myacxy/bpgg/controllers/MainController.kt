@@ -1,17 +1,17 @@
-import javafx.beans.property.SimpleStringProperty
+package net.myacxy.bpgg.controllers
+
 import javafx.stage.FileChooser
-import tornadofx.*
+import tornadofx.Controller
+import tornadofx.chooseFile
+import tornadofx.get
 
 class MainController : Controller() {
 
-    val pathOfPictureProperty = SimpleStringProperty(PREFIX_FILE_PATH)
-    var pathOfPicture by pathOfPictureProperty
-
-    fun choosePicture() {
+    fun choosePicture(): String? {
         val dialogTitle = messages["action_choose_picture"]
         val fileDescription = messages["descr_picture_file"]
         val files = chooseFile(dialogTitle, arrayOf(FileChooser.ExtensionFilter(fileDescription, FILE_EXTENSIONS_PICTURE_CHOOSER)))
-        pathOfPicture = PREFIX_FILE_PATH.plus(files.firstOrNull()?.absolutePath ?: "")
+        return files.firstOrNull()?.let { PREFIX_FILE_PATH.plus(it.absolutePath) }
     }
 
     private companion object {

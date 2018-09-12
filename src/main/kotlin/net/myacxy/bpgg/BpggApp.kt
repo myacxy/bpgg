@@ -1,3 +1,6 @@
+package net.myacxy.bpgg
+
+import net.myacxy.bpgg.views.MainView
 import tornadofx.App
 import tornadofx.launch
 

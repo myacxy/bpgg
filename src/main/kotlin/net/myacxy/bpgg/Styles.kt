@@ -1,3 +1,5 @@
+package net.myacxy.bpgg
+
 import javafx.scene.text.TextAlignment
 import tornadofx.Stylesheet
 import tornadofx.box
@@ -9,7 +11,6 @@ class Styles : Stylesheet() {
         root {
             prefWidth = 1280.pt
             prefHeight = 720.pt
-            padding = box(16.0.pt)
         }
 
         button {
