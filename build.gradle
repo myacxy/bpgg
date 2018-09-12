@@ -12,6 +12,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile 'no.tornado:tornadofx:1.7.17'
     compile 'no.tornado:tornadofx-controlsfx:0.1.1'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    compile 'com.github.thomasnield:rxkotlinfx:2.2.2'
 }
 
 compileKotlin {
