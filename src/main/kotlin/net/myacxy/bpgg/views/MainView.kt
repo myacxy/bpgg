@@ -19,14 +19,16 @@ class MainView : View() {
 
     override val root: AnchorPane by fxml("/MainView.fxml")
 
+    private val tfPlayer1: TextField by fxid("tf_mv_player1")
+    private val tfPlayer2: TextField by fxid("tf_mv_player2")
+    private val btnChoosePicture: Button by fxid("btn_mv_choose_picture")
+    private val paneRight: Pane by fxid("pane_mv_right")
+    private val ivCurrentPicture: ImageView by fxid("iv_mv_current_picture")
+    private val btnRevealPicture: Button by fxid("btn_mv_reveal_picture")
+    private val btnPresent: Button by fxid("btn_mv_present")
+
     private val mainController: MainController by inject()
     private val gameController: GameController by inject()
-    private val tfPlayer1: TextField by fxid("tf_main_player1")
-    private val tfPlayer2: TextField by fxid("tf_main_player2")
-    private val btnChoosePicture: Button by fxid("btn_main_choose_picture")
-    private val paneRight: Pane by fxid("pane_main_right")
-    private val ivCurrentPicture: ImageView by fxid("iv_main_current_picture")
-    private val btnRevealPicture: Button by fxid("btn_main_reveal_picture")
 
     init {
         with(root) {
@@ -45,14 +47,19 @@ class MainView : View() {
             imageProperty().bind(gameController.currentPathOfGuessablePictureProperty.objectBinding { path ->
                 path?.let { Image(it, true) }
             })
-            effectProperty().bind(gameController.currentBlurProperty.objectBinding { blur ->
-                blur?.toDouble()?.let { BoxBlur(it, it, 10) }
-            })
+            effect = BoxBlur().apply {
+                iterations = 10
+                widthProperty().bind(gameController.currentBlurProperty)
+                heightProperty().bind(gameController.currentBlurProperty)
+            }
             fitWidthProperty().bind(paneRight.widthProperty())
             fitHeightProperty().bind(paneRight.heightProperty())
         }
         with(btnRevealPicture) {
             action { gameController.onGameEvent(GameEvent.Reveal) }
+        }
+        with(btnPresent) {
+            action { find<PresentationView>().openWindow() }
         }
     }
 

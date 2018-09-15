@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.glyphfont.Glyph?>
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="720.0" prefWidth="1280.0"
+            xmlns="http://javafx.com/javafx/8.0.171">
     <children>
         <VBox minWidth="256.0" style="-fx-background-color: FF0000;" AnchorPane.bottomAnchor="0.0"
               AnchorPane.topAnchor="0.0">
@@ -23,41 +23,44 @@
                 </Pane>
                 <Pane prefHeight="48.0" prefWidth="160.0">
                     <children>
-                        <TextField fx:id="tf_main_player1" layoutX="56.0" layoutY="12.0"/>
+                        <TextField fx:id="tf_mv_player1" layoutX="56.0" layoutY="12.0"/>
                         <Glyph alignment="CENTER" fontFamily="FontAwesome" icon="USER" layoutX="16.0" layoutY="12.0"
                                maxWidth="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0"/>
                     </children>
                 </Pane>
                 <Pane prefHeight="48.0" prefWidth="160.0">
                     <children>
-                        <TextField fx:id="tf_main_player2" layoutX="56.0" layoutY="12.0"/>
+                        <TextField fx:id="tf_mv_player2" layoutX="56.0" layoutY="12.0"/>
                         <Glyph alignment="CENTER" fontFamily="FontAwesome" icon="USER" layoutX="16.0" layoutY="12.0"
                                maxWidth="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0"/>
                     </children>
                 </Pane>
 
-                <Button fx:id="btn_main_choose_picture" mnemonicParsing="false" prefHeight="48.0" prefWidth="256.0"
+                <Button fx:id="btn_mv_choose_picture" mnemonicParsing="false" prefHeight="48.0" prefWidth="256.0"
                         text="%action_choose_picture">
                     <graphic>
                         <Glyph fontFamily="FontAwesome" icon="FILE_PICTURE_ALT"/>
                     </graphic>
                 </Button>
 
-                <Button fx:id="btn_main_reveal_picture" mnemonicParsing="false" prefHeight="48.0" prefWidth="256.0"
+                <Button fx:id="btn_mv_reveal_picture" mnemonicParsing="false" prefHeight="48.0" prefWidth="256.0"
                         text="%action_reveal_picture">
                     <graphic>
                         <Glyph fontFamily="FontAwesome" icon="FILE_PICTURE_ALT"/>
                     </graphic>
                 </Button>
 
+                <Button fx:id="btn_mv_present" mnemonicParsing="false" prefHeight="48.0" prefWidth="256.0"
+                        text="%action_present"/>
+
             </children>
 
         </VBox>
-        <Pane fx:id="pane_main_right" layoutX="256.0" prefHeight="720.0" prefWidth="1024.0"
+        <Pane fx:id="pane_mv_right" layoutX="256.0" prefHeight="720.0" prefWidth="1024.0"
               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="0.0"
               AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView fx:id="iv_main_current_picture" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                <ImageView fx:id="iv_mv_current_picture" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
                            preserveRatio="true" style="-fx-background-size: cover; -fx-background-repeat: no-repeat;"/>
             </children>
         </Pane>
