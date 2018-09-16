@@ -9,11 +9,9 @@ import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.HBox
 import javafx.scene.paint.Color
 import net.myacxy.bpgg.controllers.GameController
-import net.myacxy.bpgg.controllers.PresentationController
 import org.controlsfx.glyphfont.FontAwesome
 import org.controlsfx.glyphfont.Glyph
-import tornadofx.View
-import tornadofx.objectBinding
+import tornadofx.*
 
 class PresentationView : View() {
 
@@ -30,8 +28,7 @@ class PresentationView : View() {
     private val hbScore2: HBox by fxid("hb_pv_score2")
     private val hbCountdown2: HBox by fxid("hb_pv_countdown2")
 
-    private val gameController: GameController by inject()
-    private val presentationController: PresentationController by inject()
+    private val gameController: GameController by inject(DefaultScope)
 
     init {
         //region picture & progress

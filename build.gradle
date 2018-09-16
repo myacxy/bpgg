@@ -6,6 +6,7 @@ version '0.1'
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
 dependencies {
@@ -15,6 +16,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxkotlin:2.3.0'
     compile 'com.github.thomasnield:rxkotlinfx:2.2.2'
     compile 'com.jfoenix:jfoenix:8.0.7'
+    compile 'com.github.bkenn:kfoenix:0.1.2-SNAPSHOT'
 }
 
 compileKotlin {
