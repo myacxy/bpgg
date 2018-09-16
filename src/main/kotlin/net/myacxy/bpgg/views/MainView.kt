@@ -1,5 +1,6 @@
 package net.myacxy.bpgg.views
 
+import com.jfoenix.effects.JFXDepthManager
 import javafx.scene.layout.BorderPane
 import net.myacxy.bpgg.Styles
 import tornadofx.*
@@ -17,6 +18,7 @@ class MainView : View() {
             addClass(Styles.root)
             title = messages["title_app"]
             left = sideMenuView.root
+            JFXDepthManager.setDepth(left, 2)
         }
 
         with(bpContent) {

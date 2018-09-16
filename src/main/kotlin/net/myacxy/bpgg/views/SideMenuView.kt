@@ -21,25 +21,22 @@ class SideMenuView : View() {
 
             // choose picture
             jfxbutton {
-                addClass(Styles.navigationMenu)
                 text = messages["action_choose_picture"]
-                graphic = Glyph(FONT_FAMILY_GLYPH, GLYPH_IMAGE)
+                graphic = Glyph(FONT_FAMILY_GLYPH, GLYPH_IMAGE).size(24.pt.value)
                 action { sideMenuController.onNavigationEvent(SideMenuEvent.ChoosePicture) }
             }
 
             // reveal picture
             jfxbutton {
-                addClass(Styles.navigationMenu)
                 text = messages["action_reveal_picture"]
-                graphic = Glyph(FONT_FAMILY_GLYPH, GLYPH_IMAGE)
+                graphic = Glyph(FONT_FAMILY_GLYPH, GLYPH_IMAGE).size(24.pt.value)
                 action { sideMenuController.onNavigationEvent(SideMenuEvent.RevealPicture) }
             }
 
             // present
             jfxbutton {
-                addClass(Styles.navigationMenu)
                 text = messages["action_present"]
-                graphic = Glyph(FONT_FAMILY_GLYPH, GLYPH_TV)
+                graphic = Glyph(FONT_FAMILY_GLYPH, GLYPH_TV).size(24.pt.value)
                 action { sideMenuController.onNavigationEvent(SideMenuEvent.Present) }
             }
 
