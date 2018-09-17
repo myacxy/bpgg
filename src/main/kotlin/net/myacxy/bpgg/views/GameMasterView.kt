@@ -34,4 +34,24 @@ class GameMasterView : View() {
         }
     }
 
+    private val tfName2: JFXTextField by fxid("tf_gmv_name2")
+    private val tfScore2: JFXTextField by fxid("tf_gmv_score2")
+    private val btnScoreUp2: JFXButton by fxid("btn_gmv_score_up2")
+    private val btnScoreDown2: JFXButton by fxid("btn_gmv_score_down2")
+
+    init {
+        tfName2.apply {
+            textProperty().bindBidirectional(gameController.player2.name)
+        }
+        tfScore2.apply {
+            textProperty().bindBidirectional(gameController.player2.score, IntegerStringConverter())
+        }
+        btnScoreUp2.apply {
+            action { gameController.onGameEvent(GameEvent.ScoreUp(gameController.player2.item)) }
+        }
+        btnScoreDown2.apply {
+            action { gameController.onGameEvent(GameEvent.ScoreDown(gameController.player2.item)) }
+        }
+    }
+
 }
