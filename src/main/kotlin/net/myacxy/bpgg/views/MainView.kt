@@ -23,10 +23,10 @@ class MainView : View() {
 
         with(bpContent) {
             center = presentationView.root.apply {
-                maxHeightProperty().bind(root.heightProperty().multiply(0.66))
+                maxHeightProperty().bind(root.heightProperty().multiply(0.5))
             }
             bottom = gameMasterView.root.apply {
-                maxHeightProperty().bind(root.heightProperty().multiply(0.33))
+                maxHeightProperty().bind(root.heightProperty().multiply(0.5))
             }
         }
 

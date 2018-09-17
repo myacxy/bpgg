@@ -1,35 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import com.jfoenix.validation.IntegerValidator?>
+<?import com.jfoenix.validation.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import org.controlsfx.glyphfont.Glyph?>
+<?import org.controlsfx.glyphfont.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.171">
     <bottom>
-        <VBox spacing="8.0"
-              BorderPane.alignment="CENTER">
+        <HBox BorderPane.alignment="CENTER">
             <children>
-                <Label text="%title_picture" />
-                <HBox prefWidth="200.0">
+                <VBox fx:id="vb_gmv_settings"
+                      prefWidth="300.0"
+                      spacing="8.0"
+                      HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="%title_picture" />
+                        <VBox spacing="8.0">
+                            <children>
+                                <VBox spacing="4.0">
+                                    <children>
+                                        <Label text="%title_timer" />
+                                        <StackPane>
+                                            <children>
+                                                <HBox alignment="CENTER_RIGHT"
+                                                      spacing="4.0">
+                                                    <children>
+                                                        <JFXButton fx:id="btn_gmv_timer_up"
+                                                                   prefHeight="24.0"
+                                                                   prefWidth="24.0">
+                                                            <padding>
+                                                                <Insets bottom="0.0"
+                                                                        left="0.0"
+                                                                        right="0.0"
+                                                                        top="0.0" />
+                                                            </padding>
+                                                            <graphic>
+                                                                <Glyph fontFamily="FontAwesome"
+                                                                       icon="PLUS" />
+                                                            </graphic>
+                                                        </JFXButton>
+                                                        <JFXButton fx:id="btn_gmv_timer_down"
+                                                                   prefHeight="24.0"
+                                                                   prefWidth="24.0">
+                                                            <padding>
+                                                                <Insets bottom="0.0"
+                                                                        left="0.0"
+                                                                        right="0.0"
+                                                                        top="0.0" />
+                                                            </padding>
+                                                            <graphic>
+                                                                <Glyph fontFamily="FontAwesome"
+                                                                       icon="MINUS" />
+                                                            </graphic>
+                                                        </JFXButton>
+                                                    </children>
+                                                    <StackPane.margin>
+                                                        <Insets />
+                                                    </StackPane.margin>
+                                                </HBox>
+                                                <JFXTextField fx:id="tf_gmv_timer"
+                                                              text="10">
+                                                    <validators>
+                                                        <IntegerValidator />
+                                                    </validators>
+                                                    <StackPane.margin>
+                                                        <Insets right="56.0" />
+                                                    </StackPane.margin>
+                                                </JFXTextField>
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="4.0">
+                                    <children>
+                                        <Label text="%title_minimum_blur" />
+                                        <StackPane>
+                                            <children>
+                                                <HBox alignment="CENTER_RIGHT"
+                                                      spacing="4.0">
+                                                    <children>
+                                                        <JFXButton fx:id="btn_gmv_min_blur_up"
+                                                                   prefHeight="24.0"
+                                                                   prefWidth="24.0">
+                                                            <padding>
+                                                                <Insets bottom="0.0"
+                                                                        left="0.0"
+                                                                        right="0.0"
+                                                                        top="0.0" />
+                                                            </padding>
+                                                            <graphic>
+                                                                <Glyph fontFamily="FontAwesome"
+                                                                       icon="PLUS" />
+                                                            </graphic>
+                                                        </JFXButton>
+                                                        <JFXButton fx:id="btn_gmv_min_blur_down"
+                                                                   prefHeight="24.0"
+                                                                   prefWidth="24.0">
+                                                            <padding>
+                                                                <Insets bottom="0.0"
+                                                                        left="0.0"
+                                                                        right="0.0"
+                                                                        top="0.0" />
+                                                            </padding>
+                                                            <graphic>
+                                                                <Glyph fontFamily="FontAwesome"
+                                                                       icon="MINUS" />
+                                                            </graphic>
+                                                        </JFXButton>
+                                                    </children>
+                                                    <StackPane.margin>
+                                                        <Insets />
+                                                    </StackPane.margin>
+                                                </HBox>
+                                                <JFXTextField fx:id="tf_gmv_min_blur"
+                                                              text="20">
+                                                    <validators>
+                                                        <IntegerValidator />
+                                                    </validators>
+                                                    <StackPane.margin>
+                                                        <Insets right="56.0" />
+                                                    </StackPane.margin>
+                                                </JFXTextField>
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="4.0">
+                                    <children>
+                                        <Label text="%title_maximum_blur" />
+                                        <StackPane>
+                                            <children>
+                                                <HBox alignment="CENTER_RIGHT"
+                                                      spacing="4.0">
+                                                    <children>
+                                                        <JFXButton fx:id="btn_gmv_max_blur_up"
+                                                                   prefHeight="24.0"
+                                                                   prefWidth="24.0">
+                                                            <padding>
+                                                                <Insets bottom="0.0"
+                                                                        left="0.0"
+                                                                        right="0.0"
+                                                                        top="0.0" />
+                                                            </padding>
+                                                            <graphic>
+                                                                <Glyph fontFamily="FontAwesome"
+                                                                       icon="PLUS" />
+                                                            </graphic>
+                                                        </JFXButton>
+                                                        <JFXButton fx:id="btn_gmv_max_blur_down"
+                                                                   prefHeight="24.0"
+                                                                   prefWidth="24.0">
+                                                            <padding>
+                                                                <Insets bottom="0.0"
+                                                                        left="0.0"
+                                                                        right="0.0"
+                                                                        top="0.0" />
+                                                            </padding>
+                                                            <graphic>
+                                                                <Glyph fontFamily="FontAwesome"
+                                                                       icon="MINUS" />
+                                                            </graphic>
+                                                        </JFXButton>
+                                                    </children>
+                                                    <StackPane.margin>
+                                                        <Insets />
+                                                    </StackPane.margin>
+                                                </HBox>
+                                                <JFXTextField fx:id="tf_gmv_max_blur"
+                                                              text="100">
+                                                    <validators>
+                                                        <IntegerValidator />
+                                                    </validators>
+                                                    <StackPane.margin>
+                                                        <Insets right="56.0" />
+                                                    </StackPane.margin>
+                                                </JFXTextField>
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="16.0"
+                                left="16.0"
+                                right="16.0"
+                                top="16.0" />
+                    </padding>
+                </VBox>
+                <VBox prefWidth="300.0"
+                      HBox.hgrow="ALWAYS">
                     <children>
                         <JFXButton text="Choose picture" />
                         <JFXButton fx:id="btn_gmv_start"
                                    text="%action_start" />
                         <JFXButton text="Reveal" />
                     </children>
-                </HBox>
+                    <padding>
+                        <Insets bottom="16.0"
+                                left="16.0"
+                                right="16.0"
+                                top="16.0" />
+                    </padding>
+                </VBox>
             </children>
-            <padding>
-                <Insets bottom="16.0"
-                        left="16.0"
-                        right="16.0"
-                        top="16.0" />
-            </padding>
-        </VBox>
+        </HBox>
     </bottom>
     <center>
         <HBox BorderPane.alignment="CENTER">
@@ -104,11 +283,16 @@
                                     </children>
                                 </StackPane>
                             </children>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
                         </VBox>
                     </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
                     <padding>
-                        <Insets bottom="16.0"
-                                left="16.0"
+                        <Insets left="16.0"
                                 right="16.0"
                                 top="16.0" />
                     </padding>
@@ -186,13 +370,15 @@
                         </VBox>
                     </children>
                     <padding>
-                        <Insets bottom="16.0"
-                                left="16.0"
+                        <Insets left="16.0"
                                 right="16.0"
                                 top="16.0" />
                     </padding>
                 </VBox>
             </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
         </HBox>
     </center>
 </BorderPane>

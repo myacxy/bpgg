@@ -2,13 +2,14 @@ package net.myacxy.bpgg.views
 
 import com.jfoenix.controls.JFXProgressBar
 import javafx.scene.control.Label
-import javafx.scene.effect.BoxBlur
+import javafx.scene.effect.GaussianBlur
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.HBox
 import javafx.scene.paint.Color
 import net.myacxy.bpgg.controllers.GameController
+import net.myacxy.bpgg.controllers.SettingsController
 import org.controlsfx.glyphfont.FontAwesome
 import org.controlsfx.glyphfont.Glyph
 import tornadofx.*
@@ -17,6 +18,7 @@ class PresentationView : View() {
 
     override val root: AnchorPane by fxml("/PresentationView.fxml")
 
+    private val settingsController: SettingsController by inject(DefaultScope)
     private val gameController: GameController by inject(DefaultScope)
 
     //<editor-fold desc="general">
@@ -28,17 +30,29 @@ class PresentationView : View() {
             imageProperty().bind(gameController.pictureProperty.objectBinding { path ->
                 path?.let { Image(it, true) }
             })
-            effect = BoxBlur().apply {
-                iterations = 10
-                widthProperty().bind(gameController.progressProperty.doubleBinding {
+            effect = GaussianBlur().apply {
+                radiusProperty().bind(gameController.progressProperty.doubleBinding {
+                    val minimumBlur = settingsController.minimumBlur
+                    val maximumBlur = settingsController.maximumBlur
                     val progress = it?.toDouble() ?: 0.0
-                    MAXIMUM_BLUR - (MAXIMUM_BLUR - MINIMUM_BLUR).div(100.0).times(progress)
-                })
-                heightProperty().bind(gameController.progressProperty.doubleBinding {
-                    val progress = it?.toDouble() ?: 0.0
-                    MAXIMUM_BLUR - (MAXIMUM_BLUR - MINIMUM_BLUR).div(100.0).times(progress)
+                    maximumBlur - (maximumBlur - minimumBlur).div(100.0).times(progress)
                 })
             }
+//            effect = BoxBlur().apply {
+//                iterations = 10
+//                widthProperty().bind(gameController.progressProperty.doubleBinding {
+//                    val minimumBlur = settingsController.minimumBlur
+//                    val maximumBlur = settingsController.maximumBlur
+//                    val progress = it?.toDouble() ?: 0.0
+//                    maximumBlur - (maximumBlur - minimumBlur).div(100.0).times(progress)
+//                })
+//                heightProperty().bind(gameController.progressProperty.doubleBinding {
+//                    val minimumBlur = settingsController.minimumBlur
+//                    val maximumBlur = settingsController.maximumBlur
+//                    val progress = it?.toDouble() ?: 0.0
+//                    maximumBlur - (maximumBlur - minimumBlur).div(100.0).times(progress)
+//                })
+//            }
             fitHeightProperty().bind(root.heightProperty().multiply(0.8))
         }
         with(pbProgress) {
@@ -99,10 +113,5 @@ class PresentationView : View() {
         }
     }
     //</editor-fold>
-
-    private companion object {
-        const val MAXIMUM_BLUR = 100.0
-        const val MINIMUM_BLUR = 20.0
-    }
 
 }

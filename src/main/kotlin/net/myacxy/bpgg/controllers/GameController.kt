@@ -59,15 +59,15 @@ class GameController : Controller() {
         if (picture.isNullOrEmpty()) return
 
         progressDisposable?.dispose()
-        val end = TimeUnit.SECONDS.toMillis(timer).div(17)
-        val start = (end.div(17) * progress.div(100)).toLong()
+        val end = TimeUnit.SECONDS.toMillis(timer).div(17L)
+        val start = (end * progress.div(100.0)).toLong()
 
         progressDisposable = Observable.intervalRange(start, end - start, 0, 17L, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(JavaFxScheduler.platform())
                 .doOnSubscribe { isInProgress = true }
                 .doFinally { isInProgress = false }
-                .subscribeBy(onNext = { progress = it.div(100.0).times(end) }, onError = { it.printStackTrace() })
+                .subscribeBy(onNext = { progress = it.times(100.0).div(end) }, onError = { it.printStackTrace() })
     }
 
     private fun onPauseEvent() {
