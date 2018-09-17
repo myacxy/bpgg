@@ -25,18 +25,25 @@ class PresentationView : View() {
 
     init {
         with(ivCurrentPicture) {
-            imageProperty().bind(gameController.currentPathOfGuessablePictureProperty.objectBinding { path ->
+            imageProperty().bind(gameController.pictureProperty.objectBinding { path ->
                 path?.let { Image(it, true) }
             })
             effect = BoxBlur().apply {
                 iterations = 10
-                widthProperty().bind(gameController.currentBlurProperty)
-                heightProperty().bind(gameController.currentBlurProperty)
+                widthProperty().bind(gameController.progressProperty.doubleBinding {
+                    val progress = it?.toDouble() ?: 0.0
+                    MAXIMUM_BLUR - (MAXIMUM_BLUR - MINIMUM_BLUR).div(100.0).times(progress)
+                })
+                heightProperty().bind(gameController.progressProperty.doubleBinding {
+                    val progress = it?.toDouble() ?: 0.0
+                    MAXIMUM_BLUR - (MAXIMUM_BLUR - MINIMUM_BLUR).div(100.0).times(progress)
+                })
             }
             fitHeightProperty().bind(root.heightProperty().multiply(0.8))
         }
         with(pbProgress) {
-
+            val progress = gameController.progressProperty.doubleBinding { it?.toDouble()?.div(100.0) ?: 0.0 }
+            progressProperty().bind(progress)
         }
     }
     //</editor-fold>
@@ -92,5 +99,10 @@ class PresentationView : View() {
         }
     }
     //</editor-fold>
+
+    private companion object {
+        const val MAXIMUM_BLUR = 100.0
+        const val MINIMUM_BLUR = 20.0
+    }
 
 }

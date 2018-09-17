@@ -25,7 +25,7 @@ class SideMenuController : Controller() {
         val fileDescription = messages["descr_picture_file"]
         val files = chooseFile(dialogTitle, arrayOf(FileChooser.ExtensionFilter(fileDescription, FILE_EXTENSIONS_PICTURE_CHOOSER)))
         val pathToFile = files.firstOrNull()?.let { PREFIX_FILE_PATH.plus(it.absolutePath) }
-        gameController.onGameEvent(GameEvent.Unblur(pathToFile))
+        gameController.onGameEvent(GameEvent.NewPicture(pathToFile))
     }
 
     private fun onPresent() {

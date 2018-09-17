@@ -17,7 +17,8 @@
                 <HBox prefWidth="200.0">
                     <children>
                         <JFXButton text="Choose picture" />
-                        <JFXButton text="Play/Pause" />
+                        <JFXButton fx:id="btn_gmv_start"
+                                   text="%action_start" />
                         <JFXButton text="Reveal" />
                     </children>
                 </HBox>

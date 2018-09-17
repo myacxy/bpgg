@@ -5,7 +5,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxjavafx.schedulers.JavaFxScheduler
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleDoubleProperty
+import javafx.beans.property.SimpleLongProperty
 import javafx.beans.property.SimpleStringProperty
 import net.myacxy.bpgg.models.GameEvent
 import net.myacxy.bpgg.models.Player
@@ -18,13 +20,19 @@ class GameController : Controller() {
     val player1 = PlayerModel()
     val player2 = PlayerModel()
 
-    val currentPathOfGuessablePictureProperty = SimpleStringProperty()
-    var currentPathOfGuessablePicture: String? by currentPathOfGuessablePictureProperty
+    val pictureProperty = SimpleStringProperty()
+    var picture: String? by pictureProperty
 
-    val currentBlurProperty = SimpleDoubleProperty(MAXIMUM_BLUR)
-    var currentBlur: Double by currentBlurProperty
+    val timerProperty = SimpleLongProperty(10L)
+    var timer: Long by timerProperty
 
-    private var animationDisposable: Disposable? = null
+    val progressProperty = SimpleDoubleProperty(0.0)
+    var progress: Double by progressProperty
+
+    val isInProgressProperty = SimpleBooleanProperty(false)
+    var isInProgress: Boolean by isInProgressProperty
+
+    private var progressDisposable: Disposable? = null
 
     init {
         player1.item = Player(messages["title_player1"])
@@ -32,38 +40,38 @@ class GameController : Controller() {
     }
 
     fun onGameEvent(event: GameEvent) = when (event) {
-        is GameEvent.Unblur -> onUnblurEvent(event.pathToPicture)
         is GameEvent.Buzzer -> onBuzzerEvent(event.player)
+        is GameEvent.NewPicture -> onNewPictureEvent(event.pathToPicture)
+        GameEvent.Pause -> onPauseEvent()
+        GameEvent.Reveal -> onRevealEvent()
         is GameEvent.ScoreDown -> onScoreDownEvent(event.player)
         is GameEvent.ScoreUp -> onScoreUpEvent(event.player)
-        GameEvent.Reveal -> onRevealEvent()
+        GameEvent.Start -> onStartEvent()
     }
 
-    private fun onUnblurEvent(path: String?) {
+    private fun onNewPictureEvent(path: String?) {
+        progressDisposable?.dispose()
+        progress = 0.0
+        picture = path
+    }
 
-        fun resetPicture() {
-            animationDisposable?.dispose()
-            currentBlur = MAXIMUM_BLUR
-            currentPathOfGuessablePicture = path
-        }
+    private fun onStartEvent() {
+        if (picture.isNullOrEmpty()) return
 
-        fun animateBlurryPicture() {
-            if (path.isNullOrEmpty()) return
+        progressDisposable?.dispose()
+        val end = TimeUnit.SECONDS.toMillis(timer).div(17)
+        val start = (end.div(17) * progress.div(100)).toLong()
 
-            animationDisposable = Observable.interval(INTERVAL_MILLISECONDS_UNBLUR, TimeUnit.MILLISECONDS)
-                    .map { it * INTERVAL_MILLISECONDS_UNBLUR }
-                    .takeWhile { it < DURATION_MILLISECONDS_UNBLUR }
-                    .subscribeOn(Schedulers.computation())
-                    .observeOn(JavaFxScheduler.platform())
-                    .subscribeBy(onError = {
-                        it.printStackTrace()
-                    }, onNext = {
-                        currentBlur = MINIMUM_BLUR + ((MAXIMUM_BLUR - MINIMUM_BLUR) * ((DURATION_MILLISECONDS_UNBLUR - it) / DURATION_MILLISECONDS_UNBLUR.toDouble()))
-                    })
-        }
+        progressDisposable = Observable.intervalRange(start, end - start, 0, 17L, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(JavaFxScheduler.platform())
+                .doOnSubscribe { isInProgress = true }
+                .doFinally { isInProgress = false }
+                .subscribeBy(onNext = { progress = it.div(100.0).times(end) }, onError = { it.printStackTrace() })
+    }
 
-        resetPicture()
-        animateBlurryPicture()
+    private fun onPauseEvent() {
+
     }
 
     private fun onBuzzerEvent(player: Player) {
@@ -78,30 +86,12 @@ class GameController : Controller() {
     }
 
     private fun onRevealEvent() {
-        if (currentPathOfGuessablePicture.isNullOrEmpty()) return
-
-        animationDisposable?.dispose()
-        val startBlur = currentBlur
-
-        animationDisposable = Observable.interval(INTERVAL_MILLISECONDS_UNBLUR, TimeUnit.MILLISECONDS)
-                .map { it * INTERVAL_MILLISECONDS_UNBLUR }
-                .takeWhile { it < DURATION_MILLISECONDS_REVEAL }
-                .subscribeOn(Schedulers.computation())
-                .observeOn(JavaFxScheduler.platform())
-                .subscribeBy(onError = {
-                    it.printStackTrace()
-                }, onNext = {
-                    currentBlur = startBlur * ((DURATION_MILLISECONDS_REVEAL - it) / DURATION_MILLISECONDS_REVEAL.toDouble())
-                })
+        if (picture.isNullOrEmpty()) return
     }
 
     private companion object {
-        const val MAXIMUM_SCORE = 5
-        const val MAXIMUM_BLUR = 100.0
-        const val MINIMUM_BLUR = 20.0
-        const val INTERVAL_MILLISECONDS_UNBLUR = 17L
-        const val DURATION_MILLISECONDS_REVEAL = 300L
-        const val DURATION_MILLISECONDS_UNBLUR = 10000L
+        const val MAXIMUM_SCORE = 7
+        const val DURATION_BUZZER = 5000L
     }
 
 }

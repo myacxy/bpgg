@@ -14,6 +14,7 @@ class GameMasterView : View() {
 
     private val gameController: GameController by inject()
 
+    //<editor-fold desc="player1">
     private val tfName1: JFXTextField by fxid("tf_gmv_name1")
     private val tfScore1: JFXTextField by fxid("tf_gmv_score1")
     private val btnScoreUp1: JFXButton by fxid("btn_gmv_score_up1")
@@ -33,7 +34,9 @@ class GameMasterView : View() {
             action { gameController.onGameEvent(GameEvent.ScoreDown(gameController.player1.item)) }
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="player2">
     private val tfName2: JFXTextField by fxid("tf_gmv_name2")
     private val tfScore2: JFXTextField by fxid("tf_gmv_score2")
     private val btnScoreUp2: JFXButton by fxid("btn_gmv_score_up2")
@@ -53,5 +56,14 @@ class GameMasterView : View() {
             action { gameController.onGameEvent(GameEvent.ScoreDown(gameController.player2.item)) }
         }
     }
+
+    private val btnStart: JFXButton by fxid("btn_gmv_start")
+
+    init {
+        btnStart.apply {
+            action { gameController.onGameEvent(GameEvent.Start) }
+        }
+    }
+    //</editor-fold>
 
 }
