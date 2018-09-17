@@ -12,18 +12,25 @@ class MainView : View() {
     private val bpContent: BorderPane by fxid("bp_mv_content")
     private val sideMenuView: SideMenuView by inject()
     private val presentationView: PresentationView by inject()
+    private val gameMasterView: GameMasterView by inject()
 
     init {
         with(root) {
             addClass(Styles.root)
             title = messages["title_app"]
             left = sideMenuView.root
-            JFXDepthManager.setDepth(left, 2)
         }
 
         with(bpContent) {
-            center = presentationView.root
+            center = presentationView.root.apply {
+                maxHeightProperty().bind(root.heightProperty().multiply(0.66))
+            }
+            bottom = gameMasterView.root.apply {
+                maxHeightProperty().bind(root.heightProperty().multiply(0.33))
+            }
         }
+
+        JFXDepthManager.setDepth(root.left, 2)
     }
 
 }

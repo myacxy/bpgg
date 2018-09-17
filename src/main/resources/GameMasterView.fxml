@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.validation.IntegerValidator?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.glyphfont.Glyph?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.171">
+    <left>
+        <VBox prefWidth="300.0"
+              spacing="8.0"
+              BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Player1" />
+                <VBox spacing="4.0">
+                    <children>
+                        <Label text="Name" />
+                        <JFXTextField fx:id="tf_gmv_name1"
+                                      text="Player1">
+                            <VBox.margin>
+                                <Insets right="56.0" />
+                            </VBox.margin>
+                        </JFXTextField>
+                    </children>
+                </VBox>
+                <VBox spacing="4.0">
+                    <children>
+                        <Label text="Score" />
+                        <StackPane>
+                            <children>
+
+                                <HBox alignment="CENTER_RIGHT"
+                                      spacing="4.0">
+                                    <children>
+                                        <JFXButton fx:id="btn_gmv_plus1"
+                                                   prefHeight="24.0"
+                                                   prefWidth="24.0">
+                                            <padding>
+                                                <Insets bottom="0.0"
+                                                        left="0.0"
+                                                        right="0.0"
+                                                        top="0.0" />
+                                            </padding>
+                                            <graphic>
+                                                <Glyph fontFamily="FontAwesome"
+                                                       icon="PLUS" />
+                                            </graphic>
+                                        </JFXButton>
+                                        <JFXButton fx:id="btn_gmv_minus1"
+                                                   prefHeight="24.0"
+                                                   prefWidth="24.0">
+                                            <padding>
+                                                <Insets bottom="0.0"
+                                                        left="0.0"
+                                                        right="0.0"
+                                                        top="0.0" />
+                                            </padding>
+                                            <graphic>
+                                                <Glyph fontFamily="FontAwesome"
+                                                       icon="MINUS" />
+                                            </graphic>
+                                        </JFXButton>
+                                    </children>
+                                    <StackPane.margin>
+                                        <Insets />
+                                    </StackPane.margin>
+                                </HBox>
+                                <JFXTextField fx:id="tf_gmv_score1"
+                                              text="0">
+                                    <validators>
+                                        <IntegerValidator />
+                                    </validators>
+                                    <StackPane.margin>
+                                        <Insets right="56.0" />
+                                    </StackPane.margin>
+                                </JFXTextField>
+                            </children>
+                        </StackPane>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="16.0"
+                        left="16.0"
+                        right="16.0"
+                        top="16.0" />
+            </padding>
+        </VBox>
+    </left>
+    <right>
+        <VBox prefWidth="300.0"
+              BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Player2" />
+            </children>
+        </VBox>
+    </right>
+    <bottom>
+        <VBox spacing="8.0"
+              BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Picture" />
+                <HBox prefWidth="200.0">
+                    <children>
+                        <JFXButton text="Choose picture" />
+                        <JFXButton text="Play/Pause" />
+                        <JFXButton text="Reveal" />
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="16.0"
+                        left="16.0"
+                        right="16.0"
+                        top="16.0" />
+            </padding>
+        </VBox>
+    </bottom>
+</BorderPane>
