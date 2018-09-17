@@ -10,10 +10,7 @@ import javafx.beans.property.SimpleStringProperty
 import net.myacxy.bpgg.models.GameEvent
 import net.myacxy.bpgg.models.Player
 import net.myacxy.bpgg.models.PlayerModel
-import tornadofx.Controller
-import tornadofx.get
-import tornadofx.getValue
-import tornadofx.setValue
+import tornadofx.*
 import java.util.concurrent.TimeUnit
 
 class GameController : Controller() {
@@ -30,14 +27,15 @@ class GameController : Controller() {
     private var animationDisposable: Disposable? = null
 
     init {
-        player1.item = Player(messages["descr_player1"])
-        player2.item = Player(messages["descr_player2"])
+        player1.item = Player(messages["title_player1"])
+        player2.item = Player(messages["title_player2"])
     }
 
     fun onGameEvent(event: GameEvent) = when (event) {
         is GameEvent.Unblur -> onUnblurEvent(event.pathToPicture)
         is GameEvent.Buzzer -> onBuzzerEvent(event.player)
-        is GameEvent.Score -> onScoreEvent(event.player)
+        is GameEvent.ScoreDown -> onScoreDownEvent(event.player)
+        is GameEvent.ScoreUp -> onScoreUpEvent(event.player)
         GameEvent.Reveal -> onRevealEvent()
     }
 
@@ -68,10 +66,15 @@ class GameController : Controller() {
         animateBlurryPicture()
     }
 
-    private fun onBuzzerEvent(player: PlayerModel) {
+    private fun onBuzzerEvent(player: Player) {
     }
 
-    private fun onScoreEvent(player: PlayerModel) {
+    private fun onScoreDownEvent(player: Player) {
+        player.score -= 1
+    }
+
+    private fun onScoreUpEvent(player: Player) {
+        player.score += 1
     }
 
     private fun onRevealEvent() {

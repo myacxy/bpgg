@@ -1,9 +1,8 @@
 package net.myacxy.bpgg.models
 
-import tornadofx.ItemViewModel
-import tornadofx.toProperty
+import tornadofx.*
 
 class PlayerModel : ItemViewModel<Player>() {
-    val name = bind { item?.name?.toProperty() }
-    val score = bind { item?.score?.toProperty() }
+    val name = bind { item?.nameProperty() }
+    val score = bind { item?.scoreProperty() }
 }

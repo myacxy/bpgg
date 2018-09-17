@@ -14,10 +14,10 @@
               spacing="8.0"
               BorderPane.alignment="CENTER">
             <children>
-                <Label text="Player1" />
+                <Label text="%title_player1" />
                 <VBox spacing="4.0">
                     <children>
-                        <Label text="Name" />
+                        <Label text="%title_name" />
                         <JFXTextField fx:id="tf_gmv_name1"
                                       text="Player1">
                             <VBox.margin>
@@ -28,14 +28,14 @@
                 </VBox>
                 <VBox spacing="4.0">
                     <children>
-                        <Label text="Score" />
+                        <Label text="%title_score" />
                         <StackPane>
                             <children>
 
                                 <HBox alignment="CENTER_RIGHT"
                                       spacing="4.0">
                                     <children>
-                                        <JFXButton fx:id="btn_gmv_plus1"
+                                        <JFXButton fx:id="btn_gmv_score_up1"
                                                    prefHeight="24.0"
                                                    prefWidth="24.0">
                                             <padding>
@@ -49,7 +49,7 @@
                                                        icon="PLUS" />
                                             </graphic>
                                         </JFXButton>
-                                        <JFXButton fx:id="btn_gmv_minus1"
+                                        <JFXButton fx:id="btn_gmv_score_down1"
                                                    prefHeight="24.0"
                                                    prefWidth="24.0">
                                             <padding>
@@ -94,7 +94,7 @@
         <VBox prefWidth="300.0"
               BorderPane.alignment="CENTER">
             <children>
-                <Label text="Player2" />
+                <Label text="%title_player2" />
             </children>
         </VBox>
     </right>
@@ -102,7 +102,7 @@
         <VBox spacing="8.0"
               BorderPane.alignment="CENTER">
             <children>
-                <Label text="Picture" />
+                <Label text="%title_picture" />
                 <HBox prefWidth="200.0">
                     <children>
                         <JFXButton text="Choose picture" />
