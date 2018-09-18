@@ -23,6 +23,8 @@ class GameController : Controller() {
     val pictureProperty = SimpleStringProperty()
     var picture: String? by pictureProperty
 
+    val hasPictureProperty = pictureProperty.booleanBinding { picture.isNullOrEmpty().not() }
+
     val timerProperty = SimpleLongProperty(10L)
     var timer: Long by timerProperty
 
@@ -71,7 +73,7 @@ class GameController : Controller() {
     }
 
     private fun onPauseEvent() {
-
+        progressDisposable?.dispose()
     }
 
     private fun onBuzzerEvent(player: Player) {

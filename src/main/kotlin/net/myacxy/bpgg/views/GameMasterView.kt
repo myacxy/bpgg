@@ -80,10 +80,33 @@ class GameMasterView : View() {
     //</editor-fold>
 
     //<editor-fold desc="actions">
+    private val btnChoosePicture: JFXButton by fxid("btn_gmv_choose_picture")
     private val btnStart: JFXButton by fxid("btn_gmv_start")
+    private val btnPause: JFXButton by fxid("btn_gmv_pause")
+    private val btnReveal: JFXButton by fxid("btn_gmv_reveal")
 
     init {
-        btnStart.action { gameController.onGameEvent(GameEvent.Start) }
+        btnChoosePicture.action {
+            val pathToFile = settingsController.choosePicture()
+            gameController.onGameEvent(GameEvent.NewPicture(pathToFile))
+        }
+        btnStart.apply {
+            val disable = gameController.hasPictureProperty.not()
+                    .or(gameController.isInProgressProperty)
+            disableProperty().bind(disable)
+            action { gameController.onGameEvent(GameEvent.Start) }
+        }
+        btnPause.apply {
+            val disable = gameController.hasPictureProperty.not()
+                    .or(gameController.isInProgressProperty.not())
+            disableProperty().bind(disable)
+            action { gameController.onGameEvent(GameEvent.Pause) }
+        }
+        btnReveal.apply {
+            val disable = gameController.hasPictureProperty.not()
+            disableProperty().bind(disable)
+            action { gameController.onGameEvent(GameEvent.Reveal) }
+        }
     }
     //</editor-fold>
 

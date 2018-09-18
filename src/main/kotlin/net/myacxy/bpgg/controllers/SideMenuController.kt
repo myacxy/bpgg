@@ -2,7 +2,6 @@ package net.myacxy.bpgg.controllers
 
 import com.jfoenix.controls.JFXDecorator
 import javafx.scene.Scene
-import javafx.stage.FileChooser
 import javafx.stage.Stage
 import net.myacxy.bpgg.models.GameEvent
 import net.myacxy.bpgg.models.SideMenuEvent
@@ -12,6 +11,7 @@ import tornadofx.*
 class SideMenuController : Controller() {
 
     private val gameController: GameController by inject()
+    private val settingsController: SettingsController by inject()
     private val presentationScope = Scope()
 
     fun onNavigationEvent(event: SideMenuEvent) = when (event) {
@@ -21,10 +21,7 @@ class SideMenuController : Controller() {
     }
 
     private fun onChoosePicture() {
-        val dialogTitle = messages["action_choose_picture"]
-        val fileDescription = messages["descr_picture_file"]
-        val files = chooseFile(dialogTitle, arrayOf(FileChooser.ExtensionFilter(fileDescription, FILE_EXTENSIONS_PICTURE_CHOOSER)))
-        val pathToFile = files.firstOrNull()?.let { PREFIX_FILE_PATH.plus(it.absolutePath) }
+        val pathToFile = settingsController.choosePicture()
         gameController.onGameEvent(GameEvent.NewPicture(pathToFile))
     }
 
@@ -36,11 +33,6 @@ class SideMenuController : Controller() {
 
     private fun onRevealPicture() {
         gameController.onGameEvent(GameEvent.Reveal)
-    }
-
-    private companion object {
-        const val PREFIX_FILE_PATH = "file:///"
-        val FILE_EXTENSIONS_PICTURE_CHOOSER = listOf("*.jpg", "*.png")
     }
 
 }

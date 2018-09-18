@@ -195,10 +195,16 @@
                 <VBox prefWidth="300.0"
                       HBox.hgrow="ALWAYS">
                     <children>
-                        <JFXButton text="Choose picture" />
-                        <JFXButton fx:id="btn_gmv_start"
-                                   text="%action_start" />
-                        <JFXButton text="Reveal" />
+                        <JFXButton fx:id="btn_gmv_choose_picture"
+                                   text="%action_choose_picture" />
+                        <HBox spacing="8.0">
+                            <JFXButton fx:id="btn_gmv_start"
+                                       text="%action_start" />
+                            <JFXButton fx:id="btn_gmv_pause"
+                                       text="%action_pause" />
+                            <JFXButton fx:id="btn_gmv_reveal"
+                                       text="%action_reveal" />
+                        </HBox>
                     </children>
                     <padding>
                         <Insets bottom="16.0"
