@@ -22,13 +22,13 @@
                             <children>
                                 <VBox spacing="4.0">
                                     <children>
-                                        <Label text="%title_timer" />
+                                        <Label text="%title_unblur_duration" />
                                         <StackPane>
                                             <children>
                                                 <HBox alignment="CENTER_RIGHT"
                                                       spacing="4.0">
                                                     <children>
-                                                        <JFXButton fx:id="btn_gmv_timer_up"
+                                                        <JFXButton fx:id="btn_gmv_unblur_duration_up"
                                                                    prefHeight="24.0"
                                                                    prefWidth="24.0">
                                                             <padding>
@@ -42,7 +42,7 @@
                                                                        icon="PLUS" />
                                                             </graphic>
                                                         </JFXButton>
-                                                        <JFXButton fx:id="btn_gmv_timer_down"
+                                                        <JFXButton fx:id="btn_gmv_unblur_duration_down"
                                                                    prefHeight="24.0"
                                                                    prefWidth="24.0">
                                                             <padding>
@@ -61,7 +61,7 @@
                                                         <Insets />
                                                     </StackPane.margin>
                                                 </HBox>
-                                                <JFXTextField fx:id="tf_gmv_timer"
+                                                <JFXTextField fx:id="tf_gmv_unblur_duration"
                                                               text="10">
                                                     <validators>
                                                         <IntegerValidator />

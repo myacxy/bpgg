@@ -50,9 +50,9 @@ class GameMasterView : View() {
     //<editor-fold desc="settings">
     private val vbSettings: VBox by fxid("vb_gmv_settings")
 
-    private val tfTimer: JFXTextField by fxid("tf_gmv_timer")
-    private val btnTimerUp: JFXButton by fxid("btn_gmv_timer_up")
-    private val btnTimerDown: JFXButton by fxid("btn_gmv_timer_down")
+    private val tfUnblurDuration: JFXTextField by fxid("tf_gmv_unblur_duration")
+    private val btnUnblurDurationUp: JFXButton by fxid("btn_gmv_unblur_duration_up")
+    private val btnUnblurDuration: JFXButton by fxid("btn_gmv_unblur_duration_down")
 
     private val tfMinimumBlur: JFXTextField by fxid("tf_gmv_min_blur")
     private val btnMinimumBlurUp: JFXButton by fxid("btn_gmv_min_blur_up")
@@ -65,9 +65,9 @@ class GameMasterView : View() {
     init {
         vbSettings.disableProperty().bind(gameController.isInProgressProperty)
 
-        tfTimer.textProperty().bindBidirectional(gameController.timerProperty, NumberStringConverter())
-        btnTimerUp.action { gameController.timer += 1 }
-        btnTimerDown.action { gameController.timer -= 1 }
+        tfUnblurDuration.textProperty().bindBidirectional(gameController.timerProperty, NumberStringConverter())
+        btnUnblurDurationUp.action { gameController.timer += 1 }
+        btnUnblurDuration.action { gameController.timer -= 1 }
 
         tfMinimumBlur.textProperty().bindBidirectional(settingsController.minimumBlurProperty, NumberStringConverter())
         btnMinimumBlurUp.action { settingsController.minimumBlur += 1 }
