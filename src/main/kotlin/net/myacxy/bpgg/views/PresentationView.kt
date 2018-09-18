@@ -1,6 +1,9 @@
 package net.myacxy.bpgg.views
 
 import com.jfoenix.controls.JFXProgressBar
+import javafx.animation.Interpolator
+import javafx.beans.value.ChangeListener
+import javafx.scene.CacheHint
 import javafx.scene.control.Label
 import javafx.scene.effect.GaussianBlur
 import javafx.scene.image.Image
@@ -20,39 +23,57 @@ class PresentationView : View() {
 
     private val settingsController: SettingsController by inject(DefaultScope)
     private val gameController: GameController by inject(DefaultScope)
+    private val gaussianBlur: GaussianBlur
+    private val shouldRevealListener: ChangeListener<Boolean>
 
-    //<editor-fold desc="general">
+    init {
+        gaussianBlur = GaussianBlur().apply { bindProgressToEffectRadius(this) }
+        shouldRevealListener = ChangeListener { _, _, reveal ->
+            if (!reveal) bindProgressToEffectRadius(gaussianBlur)
+            else playRevealAnimation(gaussianBlur)
+        }
+    }
+
+    override fun onDock() = gameController.shouldRevealProperty.addListener(shouldRevealListener)
+
+    override fun onUndock() = gameController.shouldRevealProperty.removeListener(shouldRevealListener)
+
+    private fun bindProgressToEffectRadius(effect: GaussianBlur) {
+
+        fun getBlurRadius(progress: Double): Double {
+            val minimumBlur = settingsController.minimumBlur
+            val maximumBlur = settingsController.maximumBlur
+            return maximumBlur - (maximumBlur - minimumBlur).div(100.0).times(progress)
+        }
+
+        effect.radiusProperty().apply {
+            unbind()
+            bind(gameController.progressProperty.doubleBinding {
+                getBlurRadius(it?.toDouble() ?: 0.0)
+            })
+        }
+    }
+
+    private fun playRevealAnimation(effect: GaussianBlur) = with(effect.radiusProperty()) {
+        unbind()
+        animate(0, 500.millis, Interpolator.EASE_IN)
+    }
+
+
+    //<editor-fold desc="picture views">
     private val ivCurrentPicture: ImageView by fxid("iv_pv_picture")
     private val pbProgress: JFXProgressBar by fxid("pb_pv_progress")
 
     init {
         with(ivCurrentPicture) {
+            isCache = true
+            effect = gaussianBlur
+            cacheHintProperty().bind(gameController.shouldRevealProperty.objectBinding {
+                it?.run { CacheHint.SPEED } ?: CacheHint.QUALITY
+            })
             imageProperty().bind(gameController.pictureProperty.objectBinding { path ->
                 path?.let { Image(it, true) }
             })
-            effect = GaussianBlur().apply {
-                radiusProperty().bind(gameController.progressProperty.doubleBinding {
-                    val minimumBlur = settingsController.minimumBlur
-                    val maximumBlur = settingsController.maximumBlur
-                    val progress = it?.toDouble() ?: 0.0
-                    maximumBlur - (maximumBlur - minimumBlur).div(100.0).times(progress)
-                })
-            }
-//            effect = BoxBlur().apply {
-//                iterations = 10
-//                widthProperty().bind(gameController.progressProperty.doubleBinding {
-//                    val minimumBlur = settingsController.minimumBlur
-//                    val maximumBlur = settingsController.maximumBlur
-//                    val progress = it?.toDouble() ?: 0.0
-//                    maximumBlur - (maximumBlur - minimumBlur).div(100.0).times(progress)
-//                })
-//                heightProperty().bind(gameController.progressProperty.doubleBinding {
-//                    val minimumBlur = settingsController.minimumBlur
-//                    val maximumBlur = settingsController.maximumBlur
-//                    val progress = it?.toDouble() ?: 0.0
-//                    maximumBlur - (maximumBlur - minimumBlur).div(100.0).times(progress)
-//                })
-//            }
             fitHeightProperty().bind(root.heightProperty().multiply(0.8))
         }
         with(pbProgress) {
@@ -62,7 +83,7 @@ class PresentationView : View() {
     }
     //</editor-fold>
 
-    //<editor-fold desc="player1">
+    //<editor-fold desc="player1 views">
     private val lName1: Label by fxid("l_pv_name1")
     private val hbScore1: HBox by fxid("hb_pv_score1")
     private val hbCountdown1: HBox by fxid("hb_pv_countdown1")
@@ -88,7 +109,7 @@ class PresentationView : View() {
     }
     //</editor-fold>
 
-    //<editor-fold desc="player2">
+    //<editor-fold desc="player2 views">
     private val lName2: Label by fxid("l_pv_name2")
     private val hbScore2: HBox by fxid("hb_pv_score2")
     private val hbCountdown2: HBox by fxid("hb_pv_countdown2")

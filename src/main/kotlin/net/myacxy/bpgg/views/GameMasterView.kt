@@ -93,17 +93,20 @@ class GameMasterView : View() {
         btnStart.apply {
             val disable = gameController.hasPictureProperty.not()
                     .or(gameController.isInProgressProperty)
+                    .or(gameController.shouldRevealProperty)
             disableProperty().bind(disable)
             action { gameController.onGameEvent(GameEvent.Start) }
         }
         btnPause.apply {
             val disable = gameController.hasPictureProperty.not()
                     .or(gameController.isInProgressProperty.not())
+                    .or(gameController.shouldRevealProperty)
             disableProperty().bind(disable)
             action { gameController.onGameEvent(GameEvent.Pause) }
         }
         btnReveal.apply {
             val disable = gameController.hasPictureProperty.not()
+                    .or(gameController.shouldRevealProperty)
             disableProperty().bind(disable)
             action { gameController.onGameEvent(GameEvent.Reveal) }
         }

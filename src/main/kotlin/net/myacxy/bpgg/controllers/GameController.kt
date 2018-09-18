@@ -34,6 +34,9 @@ class GameController : Controller() {
     val isInProgressProperty = SimpleBooleanProperty(false)
     var isInProgress: Boolean by isInProgressProperty
 
+    val shouldRevealProperty = SimpleBooleanProperty(false)
+    var shouldReveal by shouldRevealProperty
+
     private var progressDisposable: Disposable? = null
 
     init {
@@ -54,12 +57,11 @@ class GameController : Controller() {
     private fun onNewPictureEvent(path: String?) {
         progressDisposable?.dispose()
         progress = 0.0
+        shouldReveal = false
         picture = path
     }
 
     private fun onStartEvent() {
-        if (picture.isNullOrEmpty()) return
-
         progressDisposable?.dispose()
         val end = TimeUnit.SECONDS.toMillis(timer).div(17L)
         val start = (end * progress.div(100.0)).toLong()
@@ -88,7 +90,11 @@ class GameController : Controller() {
     }
 
     private fun onRevealEvent() {
-        if (picture.isNullOrEmpty()) return
+        progressDisposable?.dispose()
+        runLater {
+            progress = 100.0
+            shouldReveal = true
+        }
     }
 
     private companion object {
