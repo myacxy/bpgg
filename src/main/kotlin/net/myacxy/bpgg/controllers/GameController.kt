@@ -5,6 +5,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxjavafx.schedulers.JavaFxScheduler
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import javafx.animation.Interpolator
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleLongProperty
@@ -37,6 +38,13 @@ class GameController : Controller() {
     val shouldRevealProperty = SimpleBooleanProperty(false)
     var shouldReveal by shouldRevealProperty
 
+    val canPlayerBuzzerProperty = hasPictureProperty
+            .and(isInProgressProperty)
+            .and(player1.hasBuzzered.booleanBinding { it == false })
+            .and(player2.hasBuzzered.booleanBinding { it == false })
+
+    val countdownStart = 5
+
     private var progressDisposable: Disposable? = null
 
     init {
@@ -63,6 +71,9 @@ class GameController : Controller() {
 
     private fun onStartEvent() {
         progressDisposable?.dispose()
+        player1.item.hasBuzzered = false
+        player2.item.hasBuzzered = false
+
         val end = TimeUnit.SECONDS.toMillis(timer).div(17L)
         val start = (end * progress.div(100.0)).toLong()
 
@@ -79,6 +90,10 @@ class GameController : Controller() {
     }
 
     private fun onBuzzerEvent(player: Player) {
+        progressDisposable?.dispose()
+        player.hasBuzzered = true
+        player.countdown = 5
+        player.countdownProperty().animate(0, 5.seconds, Interpolator.LINEAR)
     }
 
     private fun onScoreDownEvent(player: Player) {

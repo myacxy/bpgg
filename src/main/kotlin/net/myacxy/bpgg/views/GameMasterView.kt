@@ -23,13 +23,19 @@ class GameMasterView : View() {
     private val tfScore1: JFXTextField by fxid("tf_gmv_score1")
     private val btnScoreUp1: JFXButton by fxid("btn_gmv_score_up1")
     private val btnScoreDown1: JFXButton by fxid("btn_gmv_score_down1")
+    private val btnBuzzer1: JFXButton by fxid("btn_gmv_buzzer1")
 
     init {
-        tfName1.textProperty().bindBidirectional(gameController.player1.name)
-        tfScore1.textProperty().bindBidirectional(gameController.player1.score, IntegerStringConverter())
-        btnScoreUp1.action { gameController.onGameEvent(GameEvent.ScoreUp(gameController.player1.item)) }
-        btnScoreDown1.action { gameController.onGameEvent(GameEvent.ScoreDown(gameController.player1.item)) }
-
+        with(gameController.player1) {
+            tfName1.textProperty().bindBidirectional(name)
+            tfScore1.textProperty().bindBidirectional(score, IntegerStringConverter())
+            btnScoreUp1.action { gameController.onGameEvent(GameEvent.ScoreUp(item)) }
+            btnScoreDown1.action { gameController.onGameEvent(GameEvent.ScoreDown(item)) }
+            btnBuzzer1.apply {
+                disableWhen { gameController.canPlayerBuzzerProperty.not() }
+                action { gameController.onGameEvent(GameEvent.Buzzer(item)) }
+            }
+        }
     }
     //</editor-fold>
 
@@ -38,12 +44,19 @@ class GameMasterView : View() {
     private val tfScore2: JFXTextField by fxid("tf_gmv_score2")
     private val btnScoreUp2: JFXButton by fxid("btn_gmv_score_up2")
     private val btnScoreDown2: JFXButton by fxid("btn_gmv_score_down2")
+    private val btnBuzzer2: JFXButton by fxid("btn_gmv_buzzer2")
 
     init {
-        tfName2.textProperty().bindBidirectional(gameController.player2.name)
-        tfScore2.textProperty().bindBidirectional(gameController.player2.score, IntegerStringConverter())
-        btnScoreUp2.action { gameController.onGameEvent(GameEvent.ScoreUp(gameController.player2.item)) }
-        btnScoreDown2.action { gameController.onGameEvent(GameEvent.ScoreDown(gameController.player2.item)) }
+        with(gameController.player2) {
+            tfName2.textProperty().bindBidirectional(name)
+            tfScore2.textProperty().bindBidirectional(score, IntegerStringConverter())
+            btnScoreUp2.action { gameController.onGameEvent(GameEvent.ScoreUp(item)) }
+            btnScoreDown2.action { gameController.onGameEvent(GameEvent.ScoreDown(item)) }
+            btnBuzzer2.apply {
+                disableWhen { gameController.canPlayerBuzzerProperty.not() }
+                action { gameController.onGameEvent(GameEvent.Buzzer(item)) }
+            }
+        }
     }
     //</editor-fold>
 

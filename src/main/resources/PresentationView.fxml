@@ -45,9 +45,13 @@
                                                                text="Player1" />
                                                         <HBox fx:id="hb_pv_score1"
                                                               prefHeight="48.0"
+                                                              minHeight="48.0"
+                                                              alignment="CENTER_LEFT"
                                                               spacing="4" />
                                                         <HBox fx:id="hb_pv_countdown1"
                                                               prefHeight="48.0"
+                                                              minHeight="48.0"
+                                                              alignment="CENTER_LEFT"
                                                               spacing="4" />
                                                     </children>
                                                 </VBox>
@@ -66,9 +70,13 @@
                                                                textAlignment="RIGHT" />
                                                         <HBox fx:id="hb_pv_score2"
                                                               prefHeight="48.0"
+                                                              minHeight="48.0"
+                                                              alignment="CENTER_RIGHT"
                                                               spacing="4" />
                                                         <HBox fx:id="hb_pv_countdown2"
                                                               prefHeight="48.0"
+                                                              minHeight="48.0"
+                                                              alignment="CENTER_RIGHT"
                                                               spacing="4" />
                                                     </children>
                                                 </VBox>

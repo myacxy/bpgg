@@ -293,6 +293,8 @@
                                 <Insets />
                             </VBox.margin>
                         </VBox>
+                        <JFXButton fx:id="btn_gmv_buzzer1"
+                                   text="%title_buzzer" />
                     </children>
                     <HBox.margin>
                         <Insets />
@@ -374,6 +376,8 @@
                                 </StackPane>
                             </children>
                         </VBox>
+                        <JFXButton fx:id="btn_gmv_buzzer2"
+                                   text="%title_buzzer" />
                     </children>
                     <padding>
                         <Insets left="16.0"

@@ -1,9 +1,11 @@
 package net.myacxy.bpgg.views
 
 import com.jfoenix.controls.JFXProgressBar
+import com.jfoenix.effects.JFXDepthManager
 import javafx.animation.Interpolator
 import javafx.beans.value.ChangeListener
 import javafx.scene.CacheHint
+import javafx.scene.Node
 import javafx.scene.control.Label
 import javafx.scene.effect.GaussianBlur
 import javafx.scene.image.Image
@@ -13,6 +15,7 @@ import javafx.scene.layout.HBox
 import javafx.scene.paint.Color
 import net.myacxy.bpgg.controllers.GameController
 import net.myacxy.bpgg.controllers.SettingsController
+import net.myacxy.bpgg.models.PlayerModel
 import org.controlsfx.glyphfont.FontAwesome
 import org.controlsfx.glyphfont.Glyph
 import tornadofx.*
@@ -83,54 +86,67 @@ class PresentationView : View() {
     }
     //</editor-fold>
 
-    //<editor-fold desc="player1 views">
+    //<editor-fold desc="player views">
     private val lName1: Label by fxid("l_pv_name1")
     private val hbScore1: HBox by fxid("hb_pv_score1")
     private val hbCountdown1: HBox by fxid("hb_pv_countdown1")
 
-    init {
-        with(lName1) {
-            textProperty().bind(gameController.player1.name)
-        }
-        with(hbScore1) {
-            gameController.player1.score.addListener { _, _, newValue ->
-                children.clear()
-                for (i in 1..newValue.toInt()) {
-                    val checkmark = Glyph("FontAwesome", FontAwesome.Glyph.CHECK)
-                            .color(Color.LIMEGREEN)
-                            .size(40.0)
-                    children.add(checkmark)
-                }
-            }
-        }
-        with(hbCountdown1) {
-
-        }
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="player2 views">
     private val lName2: Label by fxid("l_pv_name2")
     private val hbScore2: HBox by fxid("hb_pv_score2")
     private val hbCountdown2: HBox by fxid("hb_pv_countdown2")
 
     init {
-        with(lName2) {
-            textProperty().bind(gameController.player2.name)
+        with(gameController.player1) {
+            bindName(lName1, this)
+            bindScore(hbScore1, this)
+            bindCountdown(hbCountdown1, this)
         }
-        with(hbScore2) {
-            gameController.player2.score.addListener { _, _, newValue ->
-                children.clear()
-                for (i in 1..newValue.toInt()) {
-                    val checkmark = Glyph("FontAwesome", FontAwesome.Glyph.CHECK)
-                            .color(Color.LIMEGREEN)
-                            .size(40.0)
-                    children.add(checkmark)
-                }
+
+        with(gameController.player2) {
+            bindName(lName2, this)
+            bindScore(hbScore2, this)
+            bindCountdown(hbCountdown2, this, true)
+        }
+    }
+
+    private fun bindName(view: Label, player: PlayerModel) = with(view) {
+        textProperty().bind(player.name)
+    }
+
+    private fun bindScore(view: HBox, player: PlayerModel) = with(view) {
+        player.score.addListener { _, _, newValue ->
+            children.clear()
+            for (i in 1..newValue.toInt()) {
+                val checkmark = Glyph("FontAwesome", FontAwesome.Glyph.CHECK)
+                        .color(Color.GREEN)
+                        .size(40.0)
+                JFXDepthManager.setDepth(checkmark, 1)
+                children.add(checkmark)
             }
         }
-        with(hbCountdown1) {
+    }
 
+    private fun bindCountdown(view: HBox, player: PlayerModel, reverseOrder: Boolean = false) = with(view) {
+        visibleWhen(player.hasBuzzered)
+        player.countdown.addListener { _, _, newValue ->
+            children.clear()
+            val count = gameController.countdownStart - newValue
+            val colorThreshold = gameController.countdownStart.minus(1).div(2)
+            val circles = mutableListOf<Node>()
+            for (i in 0 until count) {
+                val color = when {
+                    i < colorThreshold -> Color.GREEN
+                    i < gameController.countdownStart - 1 -> Color.ORANGE
+                    else -> Color.INDIANRED
+                }
+                val circle = Glyph("FontAwesome", FontAwesome.Glyph.CIRCLE)
+                        .color(color)
+                        .size(40.0)
+                JFXDepthManager.setDepth(circle, 1)
+                circles.add(circle)
+            }
+            circles.takeIf { reverseOrder }?.reverse()
+            children.addAll(circles)
         }
     }
     //</editor-fold>
