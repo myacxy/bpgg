@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXTextField
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import javafx.util.converter.IntegerStringConverter
-import javafx.util.converter.NumberStringConverter
 import net.myacxy.bpgg.controllers.GameController
 import net.myacxy.bpgg.controllers.SettingsController
 import net.myacxy.bpgg.models.GameEvent
@@ -62,34 +61,6 @@ class GameMasterView : View() {
 
     //<editor-fold desc="settings">
     private val vbSettings: VBox by fxid("vb_gmv_settings")
-
-    private val tfUnblurDuration: JFXTextField by fxid("tf_gmv_unblur_duration")
-    private val btnUnblurDurationUp: JFXButton by fxid("btn_gmv_unblur_duration_up")
-    private val btnUnblurDuration: JFXButton by fxid("btn_gmv_unblur_duration_down")
-
-    private val tfMinimumBlur: JFXTextField by fxid("tf_gmv_min_blur")
-    private val btnMinimumBlurUp: JFXButton by fxid("btn_gmv_min_blur_up")
-    private val btnMinimumBlurDown: JFXButton by fxid("btn_gmv_min_blur_down")
-
-    private val tfMaximumBlur: JFXTextField by fxid("tf_gmv_max_blur")
-    private val btnMaximumBlurUp: JFXButton by fxid("btn_gmv_max_blur_up")
-    private val btnMaximumBlurDown: JFXButton by fxid("btn_gmv_max_blur_down")
-
-    init {
-        vbSettings.disableProperty().bind(gameController.isInProgressProperty)
-
-        tfUnblurDuration.textProperty().bindBidirectional(gameController.timerProperty, NumberStringConverter())
-        btnUnblurDurationUp.action { gameController.timer += 1 }
-        btnUnblurDuration.action { gameController.timer -= 1 }
-
-        tfMinimumBlur.textProperty().bindBidirectional(settingsController.minimumBlurProperty, NumberStringConverter())
-        btnMinimumBlurUp.action { settingsController.minimumBlur += 1 }
-        btnMinimumBlurDown.action { settingsController.minimumBlur -= 1 }
-
-        tfMaximumBlur.textProperty().bindBidirectional(settingsController.maximumBlurProperty, NumberStringConverter())
-        btnMaximumBlurUp.action { settingsController.maximumBlur += 1 }
-        btnMaximumBlurDown.action { settingsController.maximumBlur -= 1 }
-    }
     //</editor-fold>
 
     //<editor-fold desc="actions">

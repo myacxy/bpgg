@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             prefHeight="720.0"
             prefWidth="1280.0"
             xmlns="http://javafx.com/javafx/8.0.171">
 
+    <left>
+        <!--SideMenuView-->
+    </left>
     <center>
-        <BorderPane fx:id="bp_mv_content" />
+        <JFXDrawer fx:id="drawer"
+                   defaultDrawerSize="256.0"
+                   direction="RIGHT">
+            <content>
+                <BorderPane fx:id="content" />
+            </content>
+            <sidePane>
+                <!--SettingsView-->
+            </sidePane>
+        </JFXDrawer>
     </center>
 
 </BorderPane>
