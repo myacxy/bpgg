@@ -5,23 +5,26 @@ plugins {
 version '0.1'
 
 repositories {
+    jcenter()
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "https://dl.bintray.com/dua3/public" }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile 'no.tornado:tornadofx:1.7.17'
-    compile 'no.tornado:tornadofx-controlsfx:0.1.1'
-    compile 'io.reactivex.rxjava2:rxkotlin:2.3.0'
-    compile 'com.github.thomasnield:rxkotlinfx:2.2.2'
     compile 'com.jfoenix:jfoenix:8.0.7'
     compile 'com.github.bkenn:kfoenix:0.1.2-SNAPSHOT'
+    compile 'de.jensd:fontawesomefx-materialdesignfont:2.0.26-9.1.2-jdk8'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    compile 'com.github.thomasnield:rxkotlinfx:2.2.2'
 }
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }

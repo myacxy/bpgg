@@ -1,6 +1,8 @@
 package net.myacxy.bpgg
 
 import com.jfoenix.controls.JFXDecorator
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
+import de.jensd.fx.glyphs.materialdesignicons.utils.MaterialDesignIconFactory
 import javafx.scene.Cursor
 import javafx.scene.Scene
 import javafx.scene.layout.HBox
@@ -8,30 +10,33 @@ import javafx.scene.paint.Color
 import kfoenix.jfxbutton
 import net.myacxy.bpgg.controllers.MainController
 import net.myacxy.bpgg.views.MainView
-import org.controlsfx.glyphfont.FontAwesome
 import tornadofx.*
-import tornadofx.controlsfx.glyph
 
-class BpggApp : App(MainView::class, Styles::class) {
+class BpggApp : App(MainView::class) {
 
     private val mainController: MainController by inject()
+    private val iconFactory = MaterialDesignIconFactory.get()
+
+    init {
+        importStylesheet("/css/jfoenix-fonts.css")
+        importStylesheet("/css/jfoenix-design.css")
+        importStylesheet("/css/styles.css")
+
+        reloadStylesheetsOnFocus()
+    }
 
     override fun createPrimaryScene(view: UIComponent): Scene {
         return Scene(JFXDecorator(view.primaryStage, view.root).apply {
             (children[0] as HBox).children.add(2, jfxbutton {
                 styleClass += "jfx-decorator-button"
                 cursor = Cursor.HAND
-                graphic = glyph {
-                    fontFamily = "FontAwesome"
-                    icon = FontAwesome.Glyph.COG
-                    setColor(Color.WHITE)
-                    size(16.0)
-                }
+                textFill = Color.WHITE
                 ripplerFill = Color.WHITE
                 translateX = -30.0
-
+                iconFactory.setIcon(this, MaterialDesignIcon.SETTINGS, "16pt")
                 action { mainController.toggleSettingsMenu() }
-            })
+            }).also {
+            }
         })
     }
 

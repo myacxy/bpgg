@@ -2,6 +2,8 @@ package net.myacxy.bpgg.views
 
 import com.jfoenix.controls.JFXButton
 import com.jfoenix.controls.JFXTextField
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
+import de.jensd.fx.glyphs.materialdesignicons.utils.MaterialDesignIconFactory
 import javafx.scene.layout.VBox
 import javafx.util.converter.NumberStringConverter
 import net.myacxy.bpgg.controllers.GameController
@@ -14,6 +16,7 @@ class SettingsView : View() {
 
     private val settingsController: SettingsController by inject()
     private val gameController: GameController by inject()
+    private val iconFactory = MaterialDesignIconFactory.get()
 
     private val tfUnblurDuration: JFXTextField by fxid("unblur_duration")
     private val btnUnblurDurationUp: JFXButton by fxid("unblur_duration_up")
@@ -31,16 +34,34 @@ class SettingsView : View() {
         root.disableProperty().bind(gameController.isInProgressProperty)
 
         tfUnblurDuration.textProperty().bindBidirectional(gameController.timerProperty, NumberStringConverter())
-        btnUnblurDurationUp.action { gameController.timer += 1 }
-        btnUnblurDuration.action { gameController.timer -= 1 }
+        btnUnblurDurationUp.apply {
+            graphic = iconFactory.createIcon(MaterialDesignIcon.PLUS, "24")
+            action { gameController.timer += 1 }
+        }
+        btnUnblurDuration.apply {
+            graphic = iconFactory.createIcon(MaterialDesignIcon.MINUS, "24")
+            action { gameController.timer -= 1 }
+        }
 
         tfMinimumBlur.textProperty().bindBidirectional(settingsController.minimumBlurProperty, NumberStringConverter())
-        btnMinimumBlurUp.action { settingsController.minimumBlur += 1 }
-        btnMinimumBlurDown.action { settingsController.minimumBlur -= 1 }
+        btnMinimumBlurUp.apply {
+            graphic = iconFactory.createIcon(MaterialDesignIcon.PLUS, "24")
+            action { settingsController.minimumBlur += 1 }
+        }
+        btnMinimumBlurDown.apply {
+            graphic = iconFactory.createIcon(MaterialDesignIcon.MINUS, "24")
+            action { settingsController.minimumBlur -= 1 }
+        }
 
         tfMaximumBlur.textProperty().bindBidirectional(settingsController.maximumBlurProperty, NumberStringConverter())
-        btnMaximumBlurUp.action { settingsController.maximumBlur += 1 }
-        btnMaximumBlurDown.action { settingsController.maximumBlur -= 1 }
+        btnMaximumBlurUp.apply {
+            graphic = iconFactory.createIcon(MaterialDesignIcon.PLUS, "24")
+            action { settingsController.maximumBlur += 1 }
+        }
+        btnMaximumBlurDown.apply {
+            graphic = iconFactory.createIcon(MaterialDesignIcon.MINUS, "24")
+            action { settingsController.maximumBlur -= 1 }
+        }
     }
 
 }

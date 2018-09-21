@@ -5,63 +5,36 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<?import org.controlsfx.glyphfont.*?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
-      spacing="8.0"
-      prefWidth="256.0">
-    <padding>
-        <Insets bottom="16.0"
-                left="16.0"
-                right="16.0"
-                top="16.0" />
-    </padding>
-    <Label text="%title_picture" />
+      styleClass="settings-menu">
+
+    <Label text="%title_picture"
+           styleClass="title" />
+
     <VBox spacing="8.0">
         <children>
             <VBox spacing="4.0">
                 <children>
-                    <Label text="%title_unblur_duration" />
+                    <Label text="%title_unblur_duration"
+                           styleClass="subhead" />
                     <StackPane>
                         <children>
                             <HBox alignment="CENTER_RIGHT"
                                   spacing="4.0">
                                 <children>
                                     <JFXButton fx:id="unblur_duration_up"
-                                               prefHeight="24.0"
-                                               prefWidth="24.0">
-                                        <padding>
-                                            <Insets bottom="0.0"
-                                                    left="0.0"
-                                                    right="0.0"
-                                                    top="0.0" />
-                                        </padding>
-                                        <graphic>
-                                            <Glyph fontFamily="FontAwesome"
-                                                   icon="PLUS" />
-                                        </graphic>
-                                    </JFXButton>
+                                               styleClass="button-icon-only" />
                                     <JFXButton fx:id="unblur_duration_down"
-                                               prefHeight="24.0"
-                                               prefWidth="24.0">
-                                        <padding>
-                                            <Insets bottom="0.0"
-                                                    left="0.0"
-                                                    right="0.0"
-                                                    top="0.0" />
-                                        </padding>
-                                        <graphic>
-                                            <Glyph fontFamily="FontAwesome"
-                                                   icon="MINUS" />
-                                        </graphic>
-                                    </JFXButton>
+                                               styleClass="button-icon-only" />
                                 </children>
                                 <StackPane.margin>
                                     <Insets />
                                 </StackPane.margin>
                             </HBox>
                             <JFXTextField fx:id="unblur_duration"
-                                          text="10">
+                                          text="10"
+                                          styleClass="body1">
                                 <validators>
                                     <IntegerValidator />
                                 </validators>
@@ -75,47 +48,25 @@
             </VBox>
             <VBox spacing="4.0">
                 <children>
-                    <Label text="%title_minimum_blur" />
+                    <Label text="%title_minimum_blur"
+                           styleClass="subhead" />
                     <StackPane>
                         <children>
                             <HBox alignment="CENTER_RIGHT"
                                   spacing="4.0">
                                 <children>
                                     <JFXButton fx:id="min_blur_up"
-                                               prefHeight="24.0"
-                                               prefWidth="24.0">
-                                        <padding>
-                                            <Insets bottom="0.0"
-                                                    left="0.0"
-                                                    right="0.0"
-                                                    top="0.0" />
-                                        </padding>
-                                        <graphic>
-                                            <Glyph fontFamily="FontAwesome"
-                                                   icon="PLUS" />
-                                        </graphic>
-                                    </JFXButton>
+                                               styleClass="button-icon-only" />
                                     <JFXButton fx:id="min_blur_down"
-                                               prefHeight="24.0"
-                                               prefWidth="24.0">
-                                        <padding>
-                                            <Insets bottom="0.0"
-                                                    left="0.0"
-                                                    right="0.0"
-                                                    top="0.0" />
-                                        </padding>
-                                        <graphic>
-                                            <Glyph fontFamily="FontAwesome"
-                                                   icon="MINUS" />
-                                        </graphic>
-                                    </JFXButton>
+                                               styleClass="button-icon-only" />
                                 </children>
                                 <StackPane.margin>
                                     <Insets />
                                 </StackPane.margin>
                             </HBox>
                             <JFXTextField fx:id="min_blur"
-                                          text="20">
+                                          text="20"
+                                          styleClass="body1">
                                 <validators>
                                     <IntegerValidator />
                                 </validators>
@@ -129,47 +80,25 @@
             </VBox>
             <VBox spacing="4.0">
                 <children>
-                    <Label text="%title_maximum_blur" />
+                    <Label text="%title_maximum_blur"
+                           styleClass="subhead" />
                     <StackPane>
                         <children>
                             <HBox alignment="CENTER_RIGHT"
                                   spacing="4.0">
                                 <children>
                                     <JFXButton fx:id="max_blur_up"
-                                               prefHeight="24.0"
-                                               prefWidth="24.0">
-                                        <padding>
-                                            <Insets bottom="0.0"
-                                                    left="0.0"
-                                                    right="0.0"
-                                                    top="0.0" />
-                                        </padding>
-                                        <graphic>
-                                            <Glyph fontFamily="FontAwesome"
-                                                   icon="PLUS" />
-                                        </graphic>
-                                    </JFXButton>
+                                               styleClass="button-icon-only" />
                                     <JFXButton fx:id="max_blur_down"
-                                               prefHeight="24.0"
-                                               prefWidth="24.0">
-                                        <padding>
-                                            <Insets bottom="0.0"
-                                                    left="0.0"
-                                                    right="0.0"
-                                                    top="0.0" />
-                                        </padding>
-                                        <graphic>
-                                            <Glyph fontFamily="FontAwesome"
-                                                   icon="MINUS" />
-                                        </graphic>
-                                    </JFXButton>
+                                               styleClass="button-icon-only" />
                                 </children>
                                 <StackPane.margin>
                                     <Insets />
                                 </StackPane.margin>
                             </HBox>
                             <JFXTextField fx:id="max_blur"
-                                          text="100">
+                                          text="100"
+                                          styleClass="body1">
                                 <validators>
                                     <IntegerValidator />
                                 </validators>

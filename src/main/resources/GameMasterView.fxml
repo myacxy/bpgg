@@ -5,7 +5,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import org.controlsfx.glyphfont.Glyph?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.171">
@@ -15,14 +14,14 @@
                 <VBox prefWidth="300.0"
                       HBox.hgrow="ALWAYS">
                     <children>
-                        <JFXButton fx:id="btn_gmv_choose_picture"
+                        <JFXButton fx:id="choose_picture"
                                    text="%action_choose_picture" />
                         <HBox spacing="8.0">
-                            <JFXButton fx:id="btn_gmv_start"
+                            <JFXButton fx:id="start"
                                        text="%action_start" />
-                            <JFXButton fx:id="btn_gmv_pause"
+                            <JFXButton fx:id="pause"
                                        text="%action_pause" />
-                            <JFXButton fx:id="btn_gmv_reveal"
+                            <JFXButton fx:id="reveal"
                                        text="%action_reveal" />
                         </HBox>
                     </children>
@@ -47,7 +46,7 @@
                         <VBox spacing="4.0">
                             <children>
                                 <Label text="%title_name" />
-                                <JFXTextField fx:id="tf_gmv_name1"
+                                <JFXTextField fx:id="name1"
                                               text="Player1">
                                     <VBox.margin>
                                         <Insets right="56.0" />
@@ -64,40 +63,16 @@
                                         <HBox alignment="CENTER_RIGHT"
                                               spacing="4.0">
                                             <children>
-                                                <JFXButton fx:id="btn_gmv_score_up1"
-                                                           prefHeight="24.0"
-                                                           prefWidth="24.0">
-                                                    <padding>
-                                                        <Insets bottom="0.0"
-                                                                left="0.0"
-                                                                right="0.0"
-                                                                top="0.0" />
-                                                    </padding>
-                                                    <graphic>
-                                                        <Glyph fontFamily="FontAwesome"
-                                                               icon="PLUS" />
-                                                    </graphic>
-                                                </JFXButton>
-                                                <JFXButton fx:id="btn_gmv_score_down1"
-                                                           prefHeight="24.0"
-                                                           prefWidth="24.0">
-                                                    <padding>
-                                                        <Insets bottom="0.0"
-                                                                left="0.0"
-                                                                right="0.0"
-                                                                top="0.0" />
-                                                    </padding>
-                                                    <graphic>
-                                                        <Glyph fontFamily="FontAwesome"
-                                                               icon="MINUS" />
-                                                    </graphic>
-                                                </JFXButton>
+                                                <JFXButton fx:id="score1_up"
+                                                           styleClass="button-icon-only" />
+                                                <JFXButton fx:id="score1_down"
+                                                           styleClass="button-icon-only" />
                                             </children>
                                             <StackPane.margin>
                                                 <Insets />
                                             </StackPane.margin>
                                         </HBox>
-                                        <JFXTextField fx:id="tf_gmv_score1"
+                                        <JFXTextField fx:id="score1"
                                                       text="0">
                                             <validators>
                                                 <IntegerValidator />
@@ -113,7 +88,7 @@
                                 <Insets />
                             </VBox.margin>
                         </VBox>
-                        <JFXButton fx:id="btn_gmv_buzzer1"
+                        <JFXButton fx:id="buzzer1"
                                    text="%title_buzzer" />
                     </children>
                     <HBox.margin>
@@ -133,7 +108,7 @@
                         <VBox spacing="4.0">
                             <children>
                                 <Label text="%title_name" />
-                                <JFXTextField fx:id="tf_gmv_name2"
+                                <JFXTextField fx:id="name2"
                                               text="Player2">
                                     <VBox.margin>
                                         <Insets right="56.0" />
@@ -150,40 +125,16 @@
                                         <HBox alignment="CENTER_RIGHT"
                                               spacing="4.0">
                                             <children>
-                                                <JFXButton fx:id="btn_gmv_score_up2"
-                                                           prefHeight="24.0"
-                                                           prefWidth="24.0">
-                                                    <padding>
-                                                        <Insets bottom="0.0"
-                                                                left="0.0"
-                                                                right="0.0"
-                                                                top="0.0" />
-                                                    </padding>
-                                                    <graphic>
-                                                        <Glyph fontFamily="FontAwesome"
-                                                               icon="PLUS" />
-                                                    </graphic>
-                                                </JFXButton>
-                                                <JFXButton fx:id="btn_gmv_score_down2"
-                                                           prefHeight="24.0"
-                                                           prefWidth="24.0">
-                                                    <padding>
-                                                        <Insets bottom="0.0"
-                                                                left="0.0"
-                                                                right="0.0"
-                                                                top="0.0" />
-                                                    </padding>
-                                                    <graphic>
-                                                        <Glyph fontFamily="FontAwesome"
-                                                               icon="MINUS" />
-                                                    </graphic>
-                                                </JFXButton>
+                                                <JFXButton fx:id="score2_up"
+                                                           styleClass="button-icon-only" />
+                                                <JFXButton fx:id="score2_down"
+                                                           styleClass="button-icon-only" />
                                             </children>
                                             <StackPane.margin>
                                                 <Insets />
                                             </StackPane.margin>
                                         </HBox>
-                                        <JFXTextField fx:id="tf_gmv_score2"
+                                        <JFXTextField fx:id="score2"
                                                       text="0">
                                             <validators>
                                                 <IntegerValidator />
@@ -196,7 +147,7 @@
                                 </StackPane>
                             </children>
                         </VBox>
-                        <JFXButton fx:id="btn_gmv_buzzer2"
+                        <JFXButton fx:id="buzzer2"
                                    text="%title_buzzer" />
                     </children>
                     <padding>

@@ -1,0 +1,72 @@
+.root {
+    -fx-pref-width: 1280pt;
+    -fx-pref-height: 720pt;
+    -fx-background-color: white;
+    -fx-font-family: "Roboto";
+}
+
+.root .title {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 700;
+    -fx-font-style: oblique;
+}
+
+.jfx-decorator {
+    -fx-decorator-color: darkslategray;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container .glyph-icon {
+    -fx-fill: white;
+}
+
+.jfx-decorator .resize-border {
+    -fx-border-color: -fx-decorator-color;
+    -fx-border-width: 0pt 2pt 2pt 2pt;
+}
+
+.side-menu {
+    -fx-pref-width: 256pt;
+    -fx-background-color: lightslategray;
+}
+
+.side-menu .jfx-button {
+    -fx-min-width: 64pt;
+    -fx-pref-width: 256pt;
+    -fx-min-height: 36pt;
+    -fx-padding: 0pt 16pt 0pt 16pt;
+    -fx-alignment: CENTER_LEFT;
+    -fx-graphic-text-gap: 16pt;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-weight: 500;
+    -fx-font-size: 12pt;
+    -fx-text-fill: white;
+}
+
+.side-menu .jfx-button .glyph-icon {
+    -glyph-size: 24px;
+    -fx-fill: white;
+}
+
+.settings-menu {
+    -fx-pref-width: 256pt;
+    -fx-padding: 16pt;
+    -fx-spacing: 8pt;
+    -fx-background-color: white;
+}
+
+.jfx-button {
+    -fx-cursor: HAND;
+}
+
+.button-icon-only {
+    -fx-padding: 0pt;
+}
+
+.button-icon-only .jfx-rippler {
+    -jfx-rippler-fill: black;
+}

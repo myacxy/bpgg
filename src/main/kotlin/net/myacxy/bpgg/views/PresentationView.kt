@@ -2,6 +2,8 @@ package net.myacxy.bpgg.views
 
 import com.jfoenix.controls.JFXProgressBar
 import com.jfoenix.effects.JFXDepthManager
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
+import de.jensd.fx.glyphs.materialdesignicons.utils.MaterialDesignIconFactory
 import javafx.animation.Interpolator
 import javafx.beans.value.ChangeListener
 import javafx.scene.CacheHint
@@ -16,8 +18,6 @@ import javafx.scene.paint.Color
 import net.myacxy.bpgg.controllers.GameController
 import net.myacxy.bpgg.controllers.SettingsController
 import net.myacxy.bpgg.models.PlayerModel
-import org.controlsfx.glyphfont.FontAwesome
-import org.controlsfx.glyphfont.Glyph
 import tornadofx.*
 
 class PresentationView : View() {
@@ -117,9 +117,11 @@ class PresentationView : View() {
         player.score.addListener { _, _, newValue ->
             children.clear()
             for (i in 1..newValue.toInt()) {
-                val checkmark = Glyph("FontAwesome", FontAwesome.Glyph.CHECK)
-                        .color(Color.GREEN)
-                        .size(40.0)
+                val checkmark = MaterialDesignIconFactory.get()
+                        .createIcon(MaterialDesignIcon.CHECK, "80pt")
+                        .apply {
+                            JFXDepthManager.setDepth(this, 1)
+                        }
                 JFXDepthManager.setDepth(checkmark, 1)
                 children.add(checkmark)
             }
@@ -139,10 +141,11 @@ class PresentationView : View() {
                     i < gameController.countdownStart - 1 -> Color.ORANGE
                     else -> Color.INDIANRED
                 }
-                val circle = Glyph("FontAwesome", FontAwesome.Glyph.CIRCLE)
-                        .color(color)
-                        .size(40.0)
-                JFXDepthManager.setDepth(circle, 1)
+                val circle = MaterialDesignIconFactory.get()
+                        .createIcon(MaterialDesignIcon.CIRCLE, "80pt")
+                        .apply {
+                            JFXDepthManager.setDepth(this, 1)
+                        }
                 circles.add(circle)
             }
             circles.takeIf { reverseOrder }?.reverse()

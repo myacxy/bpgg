@@ -3,7 +3,6 @@ package net.myacxy.bpgg.views
 import com.jfoenix.controls.JFXDrawer
 import com.jfoenix.effects.JFXDepthManager
 import javafx.scene.layout.BorderPane
-import net.myacxy.bpgg.Styles
 import tornadofx.*
 
 class MainView : View() {
@@ -19,7 +18,6 @@ class MainView : View() {
 
     init {
         with(root) {
-            addClass(Styles.root)
             prefWidth = 1280.0
             prefHeight = 720.0
             title = messages["title_app"]
