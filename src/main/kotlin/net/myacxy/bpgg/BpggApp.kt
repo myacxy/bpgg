@@ -7,10 +7,14 @@ import javafx.scene.Cursor
 import javafx.scene.Scene
 import javafx.scene.layout.HBox
 import javafx.scene.paint.Color
+import javafx.stage.Stage
 import kfoenix.jfxbutton
 import net.myacxy.bpgg.controllers.MainController
 import net.myacxy.bpgg.views.MainView
+import org.jnativehook.GlobalScreen
 import tornadofx.*
+import java.util.logging.Level
+import java.util.logging.Logger
 
 class BpggApp : App(MainView::class) {
 
@@ -23,6 +27,20 @@ class BpggApp : App(MainView::class) {
         importStylesheet("/css/jfoenix-fonts.css")
         importStylesheet("/css/jfoenix-design.css")
         importStylesheet("/css/styles.css")
+    }
+
+    override fun start(stage: Stage) {
+        Logger.getLogger(GlobalScreen::class.java.`package`.name).apply {
+            level = Level.OFF
+            useParentHandlers = false
+        }
+        GlobalScreen.registerNativeHook()
+        super.start(stage)
+    }
+
+    override fun stop() {
+        GlobalScreen.unregisterNativeHook()
+        super.stop()
     }
 
     override fun createPrimaryScene(view: UIComponent): Scene {

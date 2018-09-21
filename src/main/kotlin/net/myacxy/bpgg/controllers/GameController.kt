@@ -13,10 +13,13 @@ import javafx.beans.property.SimpleStringProperty
 import net.myacxy.bpgg.models.GameEvent
 import net.myacxy.bpgg.models.Player
 import net.myacxy.bpgg.models.PlayerModel
+import org.jnativehook.GlobalScreen
+import org.jnativehook.keyboard.NativeKeyEvent
+import org.jnativehook.keyboard.NativeKeyListener
 import tornadofx.*
 import java.util.concurrent.TimeUnit
 
-class GameController : Controller() {
+class GameController : Controller(), NativeKeyListener {
 
     val player1 = PlayerModel()
     val player2 = PlayerModel()
@@ -50,7 +53,19 @@ class GameController : Controller() {
     init {
         player1.item = Player(messages["title_player1"])
         player2.item = Player(messages["title_player2"])
+
+        GlobalScreen.addNativeKeyListener(this)
     }
+
+    override fun nativeKeyTyped(p0: NativeKeyEvent) = Unit
+
+    override fun nativeKeyPressed(event: NativeKeyEvent) = when (event.keyCode to event.keyLocation) {
+        NativeKeyEvent.VC_CONTROL to NativeKeyEvent.KEY_LOCATION_LEFT -> runLater { onBuzzerEvent(player1.item) }
+        NativeKeyEvent.VC_CONTROL to NativeKeyEvent.KEY_LOCATION_RIGHT -> runLater { onBuzzerEvent(player2.item) }
+        else -> Unit
+    }
+
+    override fun nativeKeyReleased(p0: NativeKeyEvent) = Unit
 
     fun onGameEvent(event: GameEvent) = when (event) {
         is GameEvent.Buzzer -> onBuzzerEvent(event.player)
@@ -90,6 +105,8 @@ class GameController : Controller() {
     }
 
     private fun onBuzzerEvent(player: Player) {
+        if (!canPlayerBuzzerProperty.value) return
+
         progressDisposable?.dispose()
         player.hasBuzzered = true
         player.countdown = 5
