@@ -27,16 +27,28 @@ class BpggApp : App(MainView::class) {
 
     override fun createPrimaryScene(view: UIComponent): Scene {
         return Scene(JFXDecorator(view.primaryStage, view.root).apply {
-            (children[0] as HBox).children.add(2, jfxbutton {
+
+            val settingsButton = jfxbutton {
                 styleClass += "jfx-decorator-button"
                 cursor = Cursor.HAND
+                graphic = iconFactory.createIcon(MaterialDesignIcon.SETTINGS, "16")
+                ripplerFill = Color.WHITE
+                textFill = Color.WHITE
+                translateX = -30.0
+                action { mainController.toggleSettingsMenu() }
+            }
+
+            val presentationButton = jfxbutton {
+                styleClass += "jfx-decorator-button"
+                cursor = Cursor.HAND
+                graphic = iconFactory.createIcon(MaterialDesignIcon.PRESENTATION, "16")
                 textFill = Color.WHITE
                 ripplerFill = Color.WHITE
                 translateX = -30.0
-                iconFactory.setIcon(this, MaterialDesignIcon.SETTINGS, "16pt")
-                action { mainController.toggleSettingsMenu() }
-            }).also {
+                action { mainController.present() }
             }
+
+            (children[0] as HBox).children.addAll(2, listOf(presentationButton, settingsButton))
         })
     }
 

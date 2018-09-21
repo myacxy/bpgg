@@ -4,15 +4,14 @@ import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
 import de.jensd.fx.glyphs.materialdesignicons.utils.MaterialDesignIconFactory
 import javafx.scene.layout.VBox
 import kfoenix.jfxbutton
-import net.myacxy.bpgg.controllers.SideMenuController
-import net.myacxy.bpgg.models.SideMenuEvent
+import net.myacxy.bpgg.controllers.MainController
 import tornadofx.*
 
 class SideMenuView : View() {
 
     override val root = VBox()
 
-    private val sideMenuController: SideMenuController by inject()
+    private val mainController: MainController by inject()
 
     init {
         val iconFactory = MaterialDesignIconFactory.get()
@@ -24,23 +23,9 @@ class SideMenuView : View() {
             jfxbutton {
                 text = messages["action_choose_picture"]
                 graphic = iconFactory.createIcon(MaterialDesignIcon.IMAGE, "24")
-                action { sideMenuController.onNavigationEvent(SideMenuEvent.ChoosePicture) }
+                action { mainController.choosePicture() }
             }
-
-            // reveal picture
-            jfxbutton {
-                text = messages["action_reveal_picture"]
-                graphic = iconFactory.createIcon(MaterialDesignIcon.IMAGE, "24")
-                action { sideMenuController.onNavigationEvent(SideMenuEvent.RevealPicture) }
-            }
-
-            // present
-            jfxbutton {
-                text = messages["action_present"]
-                graphic = iconFactory.createIcon(MaterialDesignIcon.PRESENTATION, "24")
-                action { sideMenuController.onNavigationEvent(SideMenuEvent.Present) }
-            }
-
         }
     }
+
 }
