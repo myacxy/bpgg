@@ -1,19 +1,33 @@
-.root {
-    -fx-pref-width: 1280pt;
-    -fx-pref-height: 720pt;
-    -fx-background-color: white;
-    -fx-font-family: "Roboto";
-}
+/*******************************************************************************
+*                                                                              *
+* general                                                                       *
+*                                                                              *
+*******************************************************************************/
 
-.root .title {
-    -fx-font-size: 16pt;
-    -fx-font-family: "Roboto";
-    -fx-font-weight: 700;
-    -fx-font-style: oblique;
+.root {
+    -color-primary: darkslategray;
+    -color-primary-variant: darkslategray;
+    -color-on-primary: white;
+
+    -color-secondary: lightslategray;
+    -color-secondary-variant: lightslategray;
+    -color-on-secondary: white;
+
+    -color-background: white;
+    -color-on-background: black;
+
+    -fx-pref-width: 1280px;
+    -fx-pref-height: 720px;
+    -fx-background-color: -color-background;
+    -fx-font-family: "Roboto Sans";
+
+    -opacity-high: 0.87;
+    -opacity-medium: 0.60;
+    -opacity-low: 0.38;
 }
 
 .jfx-decorator {
-    -fx-decorator-color: darkslategray;
+    -fx-decorator-color: -color-primary;
 }
 
 .jfx-decorator .jfx-decorator-buttons-container {
@@ -21,52 +35,166 @@
 }
 
 .jfx-decorator .jfx-decorator-buttons-container .glyph-icon {
-    -fx-fill: white;
+    -fx-fill: -color-on-primary;
+}
+
+.jfx-decorator-title {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-weight: 500;
 }
 
 .jfx-decorator .resize-border {
     -fx-border-color: -fx-decorator-color;
-    -fx-border-width: 0pt 2pt 2pt 2pt;
+    -fx-border-width: 0pt 2px 2px 2px;
 }
 
-.side-menu {
-    -fx-pref-width: 256pt;
-    -fx-background-color: lightslategray;
+:disabled {
+    -fx-opacity: -opacity-low;
 }
 
-.side-menu .jfx-button {
-    -fx-min-width: 64pt;
-    -fx-pref-width: 256pt;
-    -fx-min-height: 36pt;
-    -fx-padding: 0pt 16pt 0pt 16pt;
-    -fx-alignment: CENTER_LEFT;
-    -fx-graphic-text-gap: 16pt;
-    -fx-font-family: "Roboto Medium";
-    -fx-font-weight: 500;
-    -fx-font-size: 12pt;
-    -fx-text-fill: white;
+
+/*******************************************************************************
+*                                                                              *
+* text                                                                         *
+*                                                                              *
+*******************************************************************************/
+
+.label {
+    -fx-text-fill: -color-on-background;
+    -fx-opacity: -opacity-high;
 }
 
-.side-menu .jfx-button .glyph-icon {
-    -glyph-size: 24px;
-    -fx-fill: white;
+.label.subhead {
+    -fx-opacity: -opacity-medium;
 }
 
-.settings-menu {
-    -fx-pref-width: 256pt;
-    -fx-padding: 16pt;
-    -fx-spacing: 8pt;
-    -fx-background-color: white;
-}
+/*******************************************************************************
+*                                                                              *
+* button                                                                       *
+*                                                                              *
+*******************************************************************************/
 
-.jfx-button {
+.button:hover {
     -fx-cursor: HAND;
 }
 
-.button-icon-only {
-    -fx-padding: 0pt;
+.button:hover > .text {
+    -fx-opacity: -opacity-medium;
 }
 
-.button-icon-only .jfx-rippler {
-    -jfx-rippler-fill: black;
+.button:hover > .glyph-icon {
+    -fx-opacity: -opacity-medium;
+}
+
+.button-contained, .button-contained-icon, button-outlined, .button-text {
+    -fx-min-width: 64px;
+    -fx-min-height: 36px;
+    -fx-padding: 0px 16px 0px 16px;
+    -fx-alignment: CENTER;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-weight: 500;
+    -fx-font-size: 14pt;
+}
+
+.button-contained {
+    -fx-background-color: -secondary-color;
+    -fx-text-fill: -color-on-secondary;
+}
+
+.button-contained-icon {
+    -fx-background-color: -color-secondary;
+    -fx-text-fill: -color-on-secondary;
+    -fx-padding: 0px 12px 0px 8px;
+    -fx-graphic-text-gap: 8px;
+}
+
+.button-icon {
+    -fx-padding: 0px;
+}
+
+.button-outlined {
+    -fx-text-fill: -color-secondary;
+    -fx-border-color: -color-secondary;
+    -fx-border-radius: 2px;
+    -fx-border-width: 1px;
+}
+
+.button-text {
+    -fx-padding: 0px 8px 0px 8px;
+    -fx-text-fill: -color-secondary;
+}
+
+.button-contained, .button-contained-icon {
+   -jfx-button-type: RAISED;
+}
+
+.button-contained, .button-contained-icon .jfx-rippler {
+   -jfx-rippler-fill: -color-on-secondary;
+}
+
+.button-icon .jfx-rippler {
+   -jfx-rippler-fill: -color-secondary;
+}
+
+.button-contained, .button-contained-icon .glyph-icon {
+   -fx-fill: -color-on-secondary;
+}
+
+/*******************************************************************************
+*                                                                              *
+* settings                                                                     *
+*                                                                              *
+*******************************************************************************/
+
+.settings-menu {
+    -fx-pref-width: 256px;
+    -fx-padding: 16px;
+    -fx-spacing: 8px;
+    -fx-background-color: -color-background;
+}
+
+/*******************************************************************************
+*                                                                              *
+* side menu                                                                    *
+*                                                                              *
+*******************************************************************************/
+
+.side-menu {
+    -fx-pref-width: 256px;
+    -fx-background-color: -color-secondary;
+}
+
+.side-menu .button-contained-icon {
+    -fx-pref-width: 256px;
+    -fx-min-height: 48px;
+    -fx-max-height: 48px;
+    -fx-padding: 0px 16px 0px 16px;
+    -fx-background-insets: 8px 8px 8px 8px;
+    -fx-graphic-text-gap: 24px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: transparent;
+    -jfx-button-type: FLAT;
+}
+
+.side-menu .button-contained-icon .glyph-icon {
+    -glyph-size: 24px;
+}
+
+/*******************************************************************************
+*                                                                              *
+* presentation                                                                 *
+*                                                                              *
+*******************************************************************************/
+
+.label-player {
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 56;
+    -fx-text-fill: -color-primary;
+}
+
+.label-player.label .text {
+    -fx-stroke: -color-on-primary;
+    -fx-stroke-width: 1;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.26) , 5, 0.06, -1, 2 );
 }

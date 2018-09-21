@@ -21,6 +21,7 @@ class SideMenuView : View() {
 
             // choose picture
             jfxbutton {
+                styleClass += "button-contained-icon"
                 text = messages["action_choose_picture"]
                 graphic = iconFactory.createIcon(MaterialDesignIcon.IMAGE, "24")
                 action { mainController.choosePicture() }

@@ -14,7 +14,6 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.HBox
-import javafx.scene.paint.Color
 import net.myacxy.bpgg.controllers.GameController
 import net.myacxy.bpgg.controllers.SettingsController
 import net.myacxy.bpgg.models.PlayerModel
@@ -118,8 +117,9 @@ class PresentationView : View() {
             children.clear()
             for (i in 1..newValue.toInt()) {
                 val checkmark = MaterialDesignIconFactory.get()
-                        .createIcon(MaterialDesignIcon.CHECK, "80pt")
+                        .createIcon(MaterialDesignIcon.CHECK, "64pt")
                         .apply {
+                            style += "-fx-fill: green;"
                             JFXDepthManager.setDepth(this, 1)
                         }
                 JFXDepthManager.setDepth(checkmark, 1)
@@ -137,13 +137,14 @@ class PresentationView : View() {
             val circles = mutableListOf<Node>()
             for (i in 0 until count) {
                 val color = when {
-                    i < colorThreshold -> Color.GREEN
-                    i < gameController.countdownStart - 1 -> Color.ORANGE
-                    else -> Color.INDIANRED
+                    i < colorThreshold -> "green"
+                    i < gameController.countdownStart - 1 -> "orange"
+                    else -> "indianred"
                 }
                 val circle = MaterialDesignIconFactory.get()
-                        .createIcon(MaterialDesignIcon.CIRCLE, "80pt")
+                        .createIcon(MaterialDesignIcon.CIRCLE, "64pt")
                         .apply {
+                            style += "-fx-fill: $color;"
                             JFXDepthManager.setDepth(this, 1)
                         }
                 circles.add(circle)

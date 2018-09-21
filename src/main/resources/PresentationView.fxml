@@ -42,15 +42,14 @@
                                                     </padding>
                                                     <children>
                                                         <Label fx:id="l_pv_name1"
+                                                               styleClass="label-player"
                                                                text="Player1" />
                                                         <HBox fx:id="hb_pv_score1"
-                                                              prefHeight="48.0"
-                                                              minHeight="48.0"
+                                                              minHeight="64.0"
                                                               alignment="CENTER_LEFT"
                                                               spacing="4" />
                                                         <HBox fx:id="hb_pv_countdown1"
-                                                              prefHeight="48.0"
-                                                              minHeight="48.0"
+                                                              minHeight="64.0"
                                                               alignment="CENTER_LEFT"
                                                               spacing="4" />
                                                     </children>
@@ -65,17 +64,16 @@
                                                     </padding>
                                                     <children>
                                                         <Label fx:id="l_pv_name2"
+                                                               styleClass="label-player"
                                                                alignment="TOP_RIGHT"
                                                                text="Player2"
                                                                textAlignment="RIGHT" />
                                                         <HBox fx:id="hb_pv_score2"
-                                                              prefHeight="48.0"
-                                                              minHeight="48.0"
+                                                              minHeight="64.0"
                                                               alignment="CENTER_RIGHT"
                                                               spacing="4" />
                                                         <HBox fx:id="hb_pv_countdown2"
-                                                              prefHeight="48.0"
-                                                              minHeight="48.0"
+                                                              minHeight="64.0"
                                                               alignment="CENTER_RIGHT"
                                                               spacing="4" />
                                                     </children>

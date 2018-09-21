@@ -22,8 +22,10 @@ class MainController : Controller() {
     }
 
     fun present() {
+        val view = find<PresentationView>(presentationScope)
         Stage().apply {
-            scene = Scene(JFXDecorator(this, find<PresentationView>(presentationScope).root))
+            scene = Scene(JFXDecorator(this, view.root))
+            scene.stylesheets.setAll(primaryStage.scene.stylesheets)
         }.show()
     }
 

@@ -18,11 +18,11 @@ class BpggApp : App(MainView::class) {
     private val iconFactory = MaterialDesignIconFactory.get()
 
     init {
+        reloadStylesheetsOnFocus()
+
         importStylesheet("/css/jfoenix-fonts.css")
         importStylesheet("/css/jfoenix-design.css")
         importStylesheet("/css/styles.css")
-
-        reloadStylesheetsOnFocus()
     }
 
     override fun createPrimaryScene(view: UIComponent): Scene {
@@ -53,12 +53,10 @@ class BpggApp : App(MainView::class) {
     }
 
     companion object {
-
         @JvmStatic
         fun main(args: Array<String>) {
             launch<BpggApp>(args)
         }
-
     }
 
 }

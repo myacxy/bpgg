@@ -24,9 +24,9 @@
                                   spacing="4.0">
                                 <children>
                                     <JFXButton fx:id="unblur_duration_up"
-                                               styleClass="button-icon-only" />
+                                               styleClass="button-icon" />
                                     <JFXButton fx:id="unblur_duration_down"
-                                               styleClass="button-icon-only" />
+                                               styleClass="button-icon" />
                                 </children>
                                 <StackPane.margin>
                                     <Insets />
@@ -56,9 +56,9 @@
                                   spacing="4.0">
                                 <children>
                                     <JFXButton fx:id="min_blur_up"
-                                               styleClass="button-icon-only" />
+                                               styleClass="button-icon" />
                                     <JFXButton fx:id="min_blur_down"
-                                               styleClass="button-icon-only" />
+                                               styleClass="button-icon" />
                                 </children>
                                 <StackPane.margin>
                                     <Insets />
@@ -88,9 +88,9 @@
                                   spacing="4.0">
                                 <children>
                                     <JFXButton fx:id="max_blur_up"
-                                               styleClass="button-icon-only" />
+                                               styleClass="button-icon" />
                                     <JFXButton fx:id="max_blur_down"
-                                               styleClass="button-icon-only" />
+                                               styleClass="button-icon" />
                                 </children>
                                 <StackPane.margin>
                                     <Insets />

@@ -9,29 +9,26 @@
             prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.171">
     <bottom>
-        <HBox BorderPane.alignment="CENTER">
+        <HBox prefWidth="300.0"
+              BorderPane.alignment="CENTER"
+              HBox.hgrow="ALWAYS"
+              spacing="16">
+            <padding>
+                <Insets bottom="16.0"
+                        left="16.0"
+                        right="16.0"
+                        top="16.0" />
+            </padding>
             <children>
-                <VBox prefWidth="300.0"
-                      HBox.hgrow="ALWAYS">
-                    <children>
-                        <JFXButton fx:id="choose_picture"
-                                   text="%action_choose_picture" />
-                        <HBox spacing="8.0">
-                            <JFXButton fx:id="start"
-                                       text="%action_start" />
-                            <JFXButton fx:id="pause"
-                                       text="%action_pause" />
-                            <JFXButton fx:id="reveal"
-                                       text="%action_reveal" />
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="16.0"
-                                left="16.0"
-                                right="16.0"
-                                top="16.0" />
-                    </padding>
-                </VBox>
+                <JFXButton fx:id="start"
+                           styleClass="button-outlined"
+                           text="%action_start" />
+                <JFXButton fx:id="pause"
+                           styleClass="button-outlined"
+                           text="%action_pause" />
+                <JFXButton fx:id="reveal"
+                           styleClass="button-outlined"
+                           text="%action_reveal" />
             </children>
         </HBox>
     </bottom>
@@ -42,11 +39,14 @@
                       spacing="8.0"
                       HBox.hgrow="ALWAYS">
                     <children>
-                        <Label text="%title_player1" />
+                        <Label styleClass="title"
+                               text="%title_player1" />
                         <VBox spacing="4.0">
                             <children>
-                                <Label text="%title_name" />
+                                <Label styleClass="subhead"
+                                       text="%title_name" />
                                 <JFXTextField fx:id="name1"
+                                              styleClass="body1"
                                               text="Player1">
                                     <VBox.margin>
                                         <Insets right="56.0" />
@@ -56,7 +56,8 @@
                         </VBox>
                         <VBox spacing="4.0">
                             <children>
-                                <Label text="%title_score" />
+                                <Label styleClass="subhead"
+                                       text="%title_score" />
                                 <StackPane>
                                     <children>
 
@@ -64,15 +65,16 @@
                                               spacing="4.0">
                                             <children>
                                                 <JFXButton fx:id="score1_up"
-                                                           styleClass="button-icon-only" />
+                                                           styleClass="button-icon" />
                                                 <JFXButton fx:id="score1_down"
-                                                           styleClass="button-icon-only" />
+                                                           styleClass="button-icon" />
                                             </children>
                                             <StackPane.margin>
                                                 <Insets />
                                             </StackPane.margin>
                                         </HBox>
                                         <JFXTextField fx:id="score1"
+                                                      styleClass="body1"
                                                       text="0">
                                             <validators>
                                                 <IntegerValidator />
@@ -89,6 +91,7 @@
                             </VBox.margin>
                         </VBox>
                         <JFXButton fx:id="buzzer1"
+                                   styleClass="button-outlined"
                                    text="%title_buzzer" />
                     </children>
                     <HBox.margin>
@@ -104,11 +107,14 @@
                       spacing="8.0"
                       HBox.hgrow="ALWAYS">
                     <children>
-                        <Label text="%title_player2" />
+                        <Label styleClass="title"
+                               text="%title_player2" />
                         <VBox spacing="4.0">
                             <children>
-                                <Label text="%title_name" />
+                                <Label styleClass="subhead"
+                                       text="%title_name" />
                                 <JFXTextField fx:id="name2"
+                                              styleClass="body1"
                                               text="Player2">
                                     <VBox.margin>
                                         <Insets right="56.0" />
@@ -118,7 +124,8 @@
                         </VBox>
                         <VBox spacing="4.0">
                             <children>
-                                <Label text="%title_score" />
+                                <Label styleClass="subhead"
+                                       text="%title_score" />
                                 <StackPane>
                                     <children>
 
@@ -126,15 +133,16 @@
                                               spacing="4.0">
                                             <children>
                                                 <JFXButton fx:id="score2_up"
-                                                           styleClass="button-icon-only" />
+                                                           styleClass="button-icon" />
                                                 <JFXButton fx:id="score2_down"
-                                                           styleClass="button-icon-only" />
+                                                           styleClass="button-icon" />
                                             </children>
                                             <StackPane.margin>
                                                 <Insets />
                                             </StackPane.margin>
                                         </HBox>
                                         <JFXTextField fx:id="score2"
+                                                      styleClass="body1"
                                                       text="0">
                                             <validators>
                                                 <IntegerValidator />
@@ -148,6 +156,7 @@
                             </children>
                         </VBox>
                         <JFXButton fx:id="buzzer2"
+                                   styleClass="button-outlined"
                                    text="%title_buzzer" />
                     </children>
                     <padding>
