@@ -5,16 +5,19 @@
 *******************************************************************************/
 
 .root {
-    -color-primary: darkslategray;
-    -color-primary-variant: darkslategray;
-    -color-on-primary: white;
+    -color-primary: #546e7a;
+    -color-primary-variant: #29434e;
+    -color-on-primary: #ffffff;
 
-    -color-secondary: lightslategray;
-    -color-secondary-variant: lightslategray;
-    -color-on-secondary: white;
+    -color-secondary: #ff8a80;
+    -color-secondary-variant: #c85a54;
+    -color-on-secondary: #000000;
 
-    -color-background: white;
-    -color-on-background: black;
+    -color-background: #ffffff;
+    -color-on-background: #000000;
+
+    -color-surface: #ffffff;
+    -color-on-surface: #000000;
 
     -fx-pref-width: 1280px;
     -fx-pref-height: 720px;
@@ -27,7 +30,7 @@
 }
 
 .jfx-decorator {
-    -fx-decorator-color: -color-primary;
+    -fx-decorator-color: -color-primary-variant;
 }
 
 .jfx-decorator .jfx-decorator-buttons-container {
@@ -151,7 +154,7 @@
     -fx-pref-width: 256px;
     -fx-padding: 16px;
     -fx-spacing: 8px;
-    -fx-background-color: -color-background;
+    -fx-background-color: -color-surface;
 }
 
 /*******************************************************************************
@@ -162,7 +165,8 @@
 
 .side-menu {
     -fx-pref-width: 256px;
-    -fx-background-color: -color-secondary;
+    -fx-background-color: -color-primary;
+    -fx-padding: 4px 0px 0px 0px;
 }
 
 .side-menu .button-contained-icon {
@@ -170,15 +174,24 @@
     -fx-min-height: 48px;
     -fx-max-height: 48px;
     -fx-padding: 0px 16px 0px 16px;
-    -fx-background-insets: 8px 8px 8px 8px;
-    -fx-graphic-text-gap: 24px;
-    -fx-alignment: CENTER_LEFT;
+    -fx-background-insets: 4px 8px 4px 8px;
     -fx-background-color: transparent;
-    -jfx-button-type: FLAT;
+    -fx-text-fill: -color-on-primary;
+    -jfx-button-type: RAISED;
+}
+
+.side-menu .button-contained-icon .jfx-rippler {
+    -jfx-rippler-fill: -color-on-primary;
+}
+
+.jfx-text-field {
+    -jfx-un-focus-color: -color-on-background;
+    -jfx-focus-color: -color-secondary;
 }
 
 .side-menu .button-contained-icon .glyph-icon {
     -glyph-size: 24px;
+    -fx-fill: -color-on-primary;
 }
 
 /*******************************************************************************
@@ -187,14 +200,32 @@
 *                                                                              *
 *******************************************************************************/
 
-.label-player {
-    -fx-font-family: "Roboto Medium";
-    -fx-font-size: 56;
-    -fx-text-fill: -color-primary;
+.presentation {
+    -fx-background-color: -color-background;
 }
 
-.label-player.label .text {
-    -fx-stroke: -color-on-primary;
+.presentation .label-player {
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 56;
+    -fx-text-fill: white;
+}
+
+.presentation .label-player.label .text {
+    -fx-stroke: -color-primary-variant;
     -fx-stroke-width: 1;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.26) , 5, 0.06, -1, 2 );
+}
+
+.presentation .jfx-progress-bar > .bar {
+    -fx-background-color: -color-secondary-variant;
+}
+
+/*******************************************************************************
+*                                                                              *
+* game master                                                                  *
+*                                                                              *
+*******************************************************************************/
+
+.game-master {
+    -fx-background-color: -color-background;
 }
