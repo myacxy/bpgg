@@ -16,9 +16,9 @@ class MainController : Controller() {
     private val mainView: MainView by inject()
     private val presentationScope = Scope()
 
-    fun choosePicture() {
-        val pathToFile = settingsController.choosePicture()
-        gameController.onGameEvent(GameEvent.NewPicture(pathToFile))
+    fun choosePictures() {
+        val filePaths = settingsController.choosePictures()
+        gameController.onGameEvent(GameEvent.NewPictures(filePaths))
     }
 
     fun present() {

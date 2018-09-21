@@ -12,10 +12,9 @@ import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javafx.animation.Interpolator
-import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.property.SimpleDoubleProperty
-import javafx.beans.property.SimpleLongProperty
-import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.*
+import javafx.collections.FXCollections
+import javafx.collections.ObservableList
 import net.myacxy.bpgg.models.GameEvent
 import net.myacxy.bpgg.models.Player
 import net.myacxy.bpgg.models.PlayerModel
@@ -29,6 +28,9 @@ class GameController : Controller(), NativeKeyListener {
 
     val player1 = PlayerModel()
     val player2 = PlayerModel()
+
+    val picturesProperty = SimpleListProperty<String>(FXCollections.observableArrayList())
+    var pictures: ObservableList<String> by picturesProperty
 
     val pictureProperty = SimpleStringProperty()
     var picture: String? by pictureProperty
@@ -100,7 +102,8 @@ class GameController : Controller(), NativeKeyListener {
 
     fun onGameEvent(event: GameEvent) = when (event) {
         is GameEvent.Buzzer -> onBuzzerEvent(event.player)
-        is GameEvent.NewPicture -> onNewPictureEvent(event.pathToPicture)
+        is GameEvent.NewPictures -> onNewPicturesEvent(event.filePaths)
+        is GameEvent.PictureSelect -> onNewPictureEvent(event.filePath)
         GameEvent.Pause -> onPauseEvent()
         GameEvent.Reveal -> onRevealEvent()
         is GameEvent.ScoreDown -> onScoreDownEvent(event.player)
@@ -108,11 +111,16 @@ class GameController : Controller(), NativeKeyListener {
         GameEvent.Start -> onStartEvent()
     }
 
-    private fun onNewPictureEvent(path: String?) {
+    private fun onNewPictureEvent(filePath: String?) {
         progressDisposable?.dispose()
         progress = 0.0
         shouldReveal = false
-        picture = path
+        picture = filePath
+    }
+
+    private fun onNewPicturesEvent(filePaths: List<String>) {
+        onNewPictureEvent(null)
+        pictures.setAll(filePaths)
     }
 
     private fun onStartEvent() {
