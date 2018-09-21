@@ -1,8 +1,14 @@
 package net.myacxy.bpgg.controllers
 
+import com.ivan.xinput.XInputDevice14
+import com.ivan.xinput.enums.XInputButton
+import com.ivan.xinput.listener.SimpleXInputDeviceListener
 import io.reactivex.Observable
+import io.reactivex.Observable.intervalRange
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxjavafx.schedulers.JavaFxScheduler
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javafx.animation.Interpolator
@@ -49,12 +55,37 @@ class GameController : Controller(), NativeKeyListener {
     val countdownStart = 5
 
     private var progressDisposable: Disposable? = null
+    private val controllerDisposables = CompositeDisposable()
 
     init {
         player1.item = Player(messages["title_player1"])
         player2.item = Player(messages["title_player2"])
 
         GlobalScreen.addNativeKeyListener(this)
+        initializeGamepadsAsBuzzers()
+
+    }
+
+    private fun initializeGamepadsAsBuzzers() {
+
+        fun initializeGamepadAsBuzzer(device: XInputDevice14, player: Player) {
+
+            device.addListener(object : SimpleXInputDeviceListener() {
+                override fun buttonChanged(button: XInputButton, pressed: Boolean) {
+                    onBuzzerEvent(player)
+                }
+            })
+
+            controllerDisposables += Observable.interval(0, 17L, TimeUnit.MILLISECONDS)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(JavaFxScheduler.platform())
+                    .doOnNext { device.poll() }
+                    .subscribeBy(onError = { it.printStackTrace() })
+        }
+
+        val devices = XInputDevice14.getAllDevices().filter { it.gamepadCapabilities != null }
+        devices.getOrNull(0)?.run { initializeGamepadAsBuzzer(this, player1.item) }
+        devices.getOrNull(1)?.run { initializeGamepadAsBuzzer(this, player2.item) }
     }
 
     override fun nativeKeyTyped(p0: NativeKeyEvent) = Unit
@@ -92,7 +123,7 @@ class GameController : Controller(), NativeKeyListener {
         val end = TimeUnit.SECONDS.toMillis(timer).div(17L)
         val start = (end * progress.div(100.0)).toLong()
 
-        progressDisposable = Observable.intervalRange(start, end - start, 0, 17L, TimeUnit.MILLISECONDS)
+        progressDisposable = intervalRange(start, end - start, 0, 17L, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(JavaFxScheduler.platform())
                 .doOnSubscribe { isInProgress = true }
@@ -127,11 +158,6 @@ class GameController : Controller(), NativeKeyListener {
             progress = 100.0
             shouldReveal = true
         }
-    }
-
-    private companion object {
-        const val MAXIMUM_SCORE = 7
-        const val DURATION_BUZZER = 5000L
     }
 
 }
