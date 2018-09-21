@@ -28,57 +28,57 @@
                                            preserveRatio="true" />
                                 <BorderPane>
                                     <bottom>
-                                        <HBox alignment="BOTTOM_CENTER"
+                                        <HBox alignment="BOTTOM_LEFT"
                                               prefHeight="100.0"
                                               prefWidth="200.0"
-                                              BorderPane.alignment="CENTER">
+                                              BorderPane.alignment="CENTER_LEFT">
                                             <children>
                                                 <VBox prefWidth="512.0"
-                                                      spacing="16.0">
+                                                      spacing="16.0"
+                                                      HBox.hgrow="ALWAYS">
                                                     <padding>
-                                                        <Insets bottom="72"
-                                                                left="72"
-                                                                right="72" />
+                                                        <Insets right="72.0" />
                                                     </padding>
                                                     <children>
                                                         <Label fx:id="l_pv_name1"
                                                                styleClass="label-player"
                                                                text="Player1" />
                                                         <HBox fx:id="hb_pv_score1"
-                                                              minHeight="64.0"
                                                               alignment="CENTER_LEFT"
+                                                              minHeight="64.0"
                                                               spacing="4" />
                                                         <HBox fx:id="hb_pv_countdown1"
-                                                              minHeight="64.0"
                                                               alignment="CENTER_LEFT"
+                                                              minHeight="64.0"
                                                               spacing="4" />
                                                     </children>
                                                 </VBox>
                                                 <VBox alignment="TOP_RIGHT"
                                                       prefWidth="512.0"
-                                                      spacing="4">
-                                                    <padding>
-                                                        <Insets bottom="72"
-                                                                left="72"
-                                                                right="72" />
-                                                    </padding>
+                                                      spacing="4"
+                                                      HBox.hgrow="ALWAYS">
                                                     <children>
                                                         <Label fx:id="l_pv_name2"
-                                                               styleClass="label-player"
                                                                alignment="TOP_RIGHT"
+                                                               styleClass="label-player"
                                                                text="Player2"
                                                                textAlignment="RIGHT" />
                                                         <HBox fx:id="hb_pv_score2"
-                                                              minHeight="64.0"
                                                               alignment="CENTER_RIGHT"
+                                                              minHeight="64.0"
                                                               spacing="4" />
                                                         <HBox fx:id="hb_pv_countdown2"
-                                                              minHeight="64.0"
                                                               alignment="CENTER_RIGHT"
+                                                              minHeight="64.0"
                                                               spacing="4" />
                                                     </children>
                                                 </VBox>
                                             </children>
+                                            <BorderPane.margin>
+                                                <Insets bottom="72.0"
+                                                        left="72.0"
+                                                        right="72.0" />
+                                            </BorderPane.margin>
                                         </HBox>
                                     </bottom>
                                 </BorderPane>
@@ -95,7 +95,7 @@
         <bottom>
             <AnchorPane BorderPane.alignment="CENTER">
                 <JFXProgressBar fx:id="pb_pv_progress"
-                                prefHeight="16"
+                                prefHeight="48"
                                 AnchorPane.leftAnchor="0.0"
                                 AnchorPane.rightAnchor="0.0" />
             </AnchorPane>
