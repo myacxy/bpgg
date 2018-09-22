@@ -72,6 +72,7 @@ class PresentationView : View() {
         with(ivCurrentPicture) {
             isCache = true
             effect = gaussianBlur
+            opacity = 0.0
             cacheHintProperty().bind(gameController.shouldRevealProperty.objectBinding {
                 it?.run { CacheHint.SPEED } ?: CacheHint.QUALITY
             })
@@ -79,6 +80,11 @@ class PresentationView : View() {
                 path?.let { Image(it, true) }
             })
             fitHeightProperty().bind(root.heightProperty().multiply(0.8))
+            gameController.showPictureProperty.addListener { _, _, showPicture ->
+                val opacity = if (showPicture) 1.0 else 0.0
+                val interpolator = if (showPicture) Interpolator.EASE_IN else Interpolator.EASE_OUT
+                fade(500.millis, opacity, interpolator, false, true)
+            }
         }
         with(pbProgress) {
             val progress = gameController.progressProperty.doubleBinding { it?.toDouble()?.div(100.0) ?: 0.0 }

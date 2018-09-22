@@ -11,6 +11,7 @@ import io.reactivex.rxjavafx.schedulers.JavaFxScheduler
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import javafx.beans.binding.BooleanBinding
 import javafx.beans.property.*
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
@@ -48,10 +49,12 @@ class GameController : Controller(), NativeKeyListener {
     val shouldRevealProperty = SimpleBooleanProperty(false)
     var shouldReveal by shouldRevealProperty
 
-    val canPlayerBuzzerProperty = hasPictureProperty
+    val canPlayerBuzzerProperty: BooleanBinding = hasPictureProperty
             .and(isInProgressProperty)
             .and(player1.hasBuzzered.booleanBinding { it == false })
             .and(player2.hasBuzzered.booleanBinding { it == false })
+
+    val showPictureProperty: BooleanBinding = canPlayerBuzzerProperty.or(shouldRevealProperty)
 
     val countdownStart = 5
 
@@ -115,9 +118,11 @@ class GameController : Controller(), NativeKeyListener {
         progressDisposable?.dispose()
         countdownDisposable?.dispose()
 
+        picture = filePath
         progress = 0.0
         shouldReveal = false
-        picture = filePath
+        player1.item.hasBuzzered = false
+        player2.item.hasBuzzered = false
     }
 
     private fun onNewPicturesEvent(filePaths: List<String>) {

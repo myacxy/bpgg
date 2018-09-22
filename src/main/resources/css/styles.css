@@ -181,7 +181,7 @@
     -fx-background-insets: 4px 8px 4px 8px;
     -fx-background-color: transparent;
     -fx-text-fill: -color-on-primary;
-    -jfx-button-type: RAISED;
+    -jfx-button-type: FLAT;
 }
 
 .side-menu .button-contained-icon .jfx-rippler {
