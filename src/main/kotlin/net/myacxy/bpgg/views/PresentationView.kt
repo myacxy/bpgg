@@ -142,13 +142,11 @@ class PresentationView : View() {
         player.countdown.addListener { _, _, newValue ->
             children.clear()
             val count = gameController.countdownStart - newValue
-            val colorThreshold = gameController.countdownStart.minus(1).div(2)
             val circles = mutableListOf<Node>()
             for (i in 0 until count) {
                 val color = when {
-                    i < colorThreshold -> "green"
-                    i < gameController.countdownStart - 1 -> "orange"
-                    else -> "indianred"
+                    count < gameController.countdownStart -> "green"
+                    else -> "-color-secondary-variant"
                 }
                 val circle = MaterialDesignIconFactory.get()
                         .createIcon(MaterialDesignIcon.CIRCLE, "64pt")
