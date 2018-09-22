@@ -11,7 +11,6 @@ import io.reactivex.rxjavafx.schedulers.JavaFxScheduler
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import javafx.animation.Interpolator
 import javafx.beans.property.*
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
@@ -56,7 +55,9 @@ class GameController : Controller(), NativeKeyListener {
 
     val countdownStart = 5
 
+    private val soundController: SoundController by inject()
     private var progressDisposable: Disposable? = null
+    private var countdownDisposable: Disposable? = null
     private val controllerDisposables = CompositeDisposable()
 
     init {
@@ -65,7 +66,6 @@ class GameController : Controller(), NativeKeyListener {
 
         GlobalScreen.addNativeKeyListener(this)
         initializeGamepadsAsBuzzers()
-
     }
 
     private fun initializeGamepadsAsBuzzers() {
@@ -113,6 +113,8 @@ class GameController : Controller(), NativeKeyListener {
 
     private fun onNewPictureEvent(filePath: String?) {
         progressDisposable?.dispose()
+        countdownDisposable?.dispose()
+
         progress = 0.0
         shouldReveal = false
         picture = filePath
@@ -125,6 +127,8 @@ class GameController : Controller(), NativeKeyListener {
 
     private fun onStartEvent() {
         progressDisposable?.dispose()
+        countdownDisposable?.dispose()
+
         player1.item.hasBuzzered = false
         player2.item.hasBuzzered = false
 
@@ -146,10 +150,26 @@ class GameController : Controller(), NativeKeyListener {
     private fun onBuzzerEvent(player: Player) {
         if (!canPlayerBuzzerProperty.value) return
 
+        countdownDisposable?.dispose()
         progressDisposable?.dispose()
+
         player.hasBuzzered = true
-        player.countdown = 5
-        player.countdownProperty().animate(0, 5.seconds, Interpolator.LINEAR)
+        player.countdown = countdownStart
+
+        countdownDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
+                .takeUntil { player.countdown < 2 }
+                .subscribeOn(Schedulers.io())
+                .observeOn(JavaFxScheduler.platform())
+                .subscribeBy(onNext = {
+                    if (player.countdown > 1) {
+                        soundController.playBeep()
+                    }
+                    player.countdown -= 1
+                }, onComplete = {
+                    soundController.playBoop()
+                }, onError = {
+                    it.printStackTrace()
+                })
     }
 
     private fun onScoreDownEvent(player: Player) {
@@ -162,6 +182,8 @@ class GameController : Controller(), NativeKeyListener {
 
     private fun onRevealEvent() {
         progressDisposable?.dispose()
+        countdownDisposable?.dispose()
+
         runLater {
             progress = 100.0
             shouldReveal = true
