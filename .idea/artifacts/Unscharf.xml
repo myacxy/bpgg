@@ -1,0 +1,47 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Unscharf">
+    <output-path>$PROJECT_DIR$/out/artifacts/Unscharf</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="net.myacxy.bpgg.BpggApp" />
+        <option name="description" value="" />
+        <option name="height" value="720" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="Unscharf" />
+        <option name="vendor" value="" />
+        <option name="version" value="0.1" />
+        <option name="width" value="1280" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="blurred.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="library" level="project" name="Gradle: com.1stleg:jnativehook:2.1.0" />
+        <element id="library" level="project" name="Gradle: com.github.bkenn:kfoenix:0.1.2-SNAPSHOT" />
+        <element id="library" level="project" name="Gradle: com.github.strikerx3:jxinput:ca55984" />
+        <element id="library" level="project" name="Gradle: com.github.thomasnield:rxkotlinfx:2.2.2" />
+        <element id="library" level="project" name="Gradle: com.jfoenix:jfoenix:8.0.7" />
+        <element id="library" level="project" name="Gradle: de.jensd:fontawesomefx-commons:9.1.2-jdk8" />
+        <element id="library" level="project" name="Gradle: de.jensd:fontawesomefx-materialdesignfont:2.0.26-9.1.2-jdk8" />
+        <element id="library" level="project" name="Gradle: io.reactivex.rxjava2:rxjava:2.2.0" />
+        <element id="library" level="project" name="Gradle: io.reactivex.rxjava2:rxjavafx:2.2.2" />
+        <element id="library" level="project" name="Gradle: io.reactivex.rxjava2:rxkotlin:2.3.0" />
+        <element id="library" level="project" name="Gradle: javax.json:javax.json-api:1.1.2" />
+        <element id="library" level="project" name="Gradle: no.tornado:tornadofx:1.7.17" />
+        <element id="library" level="project" name="Gradle: org.glassfish:javax.json:1.1.2" />
+        <element id="library" level="project" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.60" />
+        <element id="library" level="project" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.61" />
+        <element id="library" level="project" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61" />
+        <element id="library" level="project" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.61" />
+        <element id="library" level="project" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.61" />
+        <element id="library" level="project" name="Gradle: org.jetbrains:annotations:13.0" />
+        <element id="library" level="project" name="Gradle: org.reactivestreams:reactive-streams:1.0.2" />
+        <element id="module-output" name="net.myacxy.bpgg_main" />
+        <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
+      </element>
+    </root>
+  </artifact>
+</component>

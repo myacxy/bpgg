@@ -210,6 +210,10 @@
     -fx-text-fill: white;
 }
 
+.presentation .label-player:buzzered {
+    -fx-text-fill: -color-secondary-variant;
+}
+
 .presentation .label-player.label .text {
     -fx-stroke: -color-primary-variant;
     -fx-stroke-width: 1;

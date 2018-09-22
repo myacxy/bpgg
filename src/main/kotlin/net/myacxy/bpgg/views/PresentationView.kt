@@ -5,7 +5,9 @@ import com.jfoenix.effects.JFXDepthManager
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
 import de.jensd.fx.glyphs.materialdesignicons.utils.MaterialDesignIconFactory
 import javafx.animation.Interpolator
+import javafx.beans.property.BooleanPropertyBase
 import javafx.beans.value.ChangeListener
+import javafx.css.PseudoClass
 import javafx.scene.CacheHint
 import javafx.scene.Node
 import javafx.scene.control.Label
@@ -110,6 +112,13 @@ class PresentationView : View() {
 
     private fun bindName(view: Label, player: PlayerModel) = with(view) {
         textProperty().bind(player.name)
+        val buzzered = object : BooleanPropertyBase(false) {
+            override fun getName(): String = "buzzered"
+            override fun getBean(): Any = view
+            override fun invalidated() = pseudoClassStateChanged(BUZZERED_PSEUDO_CLASS, get())
+        }
+
+        player.hasBuzzered.addListener { _, _, hasBuzzered -> buzzered.set(hasBuzzered) }
     }
 
     private fun bindScore(view: HBox, player: PlayerModel) = with(view) {
@@ -154,5 +163,10 @@ class PresentationView : View() {
         }
     }
     //</editor-fold>
+
+    private companion object {
+        @JvmStatic
+        val BUZZERED_PSEUDO_CLASS = PseudoClass.getPseudoClass("buzzered")
+    }
 
 }
