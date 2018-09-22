@@ -2,12 +2,13 @@ package net.myacxy.bpgg.views
 
 import com.jfoenix.controls.JFXButton
 import com.jfoenix.controls.JFXTextField
+import com.jfoenix.controls.JFXToggleNode
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
 import de.jensd.fx.glyphs.materialdesignicons.utils.MaterialDesignIconFactory
 import javafx.scene.layout.BorderPane
 import javafx.util.converter.IntegerStringConverter
 import net.myacxy.bpgg.controllers.GameController
-import net.myacxy.bpgg.controllers.SettingsController
+import net.myacxy.bpgg.controllers.SoundController
 import net.myacxy.bpgg.models.GameEvent
 import tornadofx.*
 
@@ -15,8 +16,8 @@ class GameMasterView : View() {
 
     override val root: BorderPane by fxml("/GameMasterView.fxml")
 
-    private val settingsController: SettingsController by inject()
     private val gameController: GameController by inject()
+    private val soundController: SoundController by inject()
     private val iconFactory = MaterialDesignIconFactory.get()
 
     //<editor-fold desc="player1">
@@ -77,6 +78,8 @@ class GameMasterView : View() {
     private val btnStart: JFXButton by fxid("start")
     private val btnPause: JFXButton by fxid("pause")
     private val btnReveal: JFXButton by fxid("reveal")
+    private val tnIntro: JFXToggleNode by fxid("intro")
+    private val tnBackground: JFXToggleNode by fxid("background")
 
     init {
         btnStart.apply {
@@ -98,6 +101,14 @@ class GameMasterView : View() {
                     .or(gameController.shouldRevealProperty)
             disableProperty().bind(disable)
             action { gameController.onGameEvent(GameEvent.Reveal) }
+        }
+        tnIntro.apply {
+            selectedProperty().bindBidirectional(soundController.isIntroMusicPlayingProperty)
+            action { soundController.toggleIntroMusic() }
+        }
+        tnBackground.apply {
+            selectedProperty().bindBidirectional(soundController.isBackgroundMusicPlayingProperty)
+            action { soundController.toggleBackgroundMusic() }
         }
     }
     //</editor-fold>

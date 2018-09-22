@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.*?>
 <?import com.jfoenix.validation.IntegerValidator?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -30,6 +31,16 @@
                 <JFXButton fx:id="reveal"
                            styleClass="button-outlined"
                            text="%action_reveal" />
+                <JFXToggleNode fx:id="intro"
+                               text="%title_music_intro">
+                    <MaterialDesignIconView glyphName="VOLUME_HIGH"
+                                            size="2em" />
+                </JFXToggleNode>
+                <JFXToggleNode fx:id="background"
+                               text="%title_music_background">
+                    <MaterialDesignIconView glyphName="VOLUME_HIGH"
+                                            size="2em" />
+                </JFXToggleNode>
             </children>
         </HBox>
     </bottom>

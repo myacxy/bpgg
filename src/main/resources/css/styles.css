@@ -78,7 +78,7 @@
 *                                                                              *
 *******************************************************************************/
 
-.button:hover {
+.button:hover, .jfx-toggle-node:hover {
     -fx-cursor: HAND;
 }
 
@@ -136,12 +136,16 @@
    -jfx-rippler-fill: -color-on-secondary;
 }
 
-.button-icon .jfx-rippler {
+.button-icon, .jfx-toggle-node .jfx-rippler {
    -jfx-rippler-fill: -color-secondary;
 }
 
 .button-contained, .button-contained-icon .glyph-icon {
    -fx-fill: -color-on-secondary;
+}
+
+.jfx-toggle-node {
+    -jfx-toggle-color: -color-secondary;
 }
 
 /*******************************************************************************
