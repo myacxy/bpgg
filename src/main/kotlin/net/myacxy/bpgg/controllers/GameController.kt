@@ -16,15 +16,14 @@ import javafx.beans.property.*
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import net.myacxy.bpgg.models.GameEvent
+import net.myacxy.bpgg.models.KeyboardListener
 import net.myacxy.bpgg.models.Player
 import net.myacxy.bpgg.models.PlayerModel
-import org.jnativehook.GlobalScreen
-import org.jnativehook.keyboard.NativeKeyEvent
-import org.jnativehook.keyboard.NativeKeyListener
 import tornadofx.*
+import java.awt.event.KeyEvent
 import java.util.concurrent.TimeUnit
 
-class GameController : Controller(), NativeKeyListener {
+class GameController : Controller() {
 
     val player1 = PlayerModel()
     val player2 = PlayerModel()
@@ -58,7 +57,9 @@ class GameController : Controller(), NativeKeyListener {
 
     val countdownStart = 5
 
+    private val keyboardController: KeyboardController by inject()
     private val soundController: SoundController by inject()
+
     private var progressDisposable: Disposable? = null
     private var countdownDisposable: Disposable? = null
     private val controllerDisposables = CompositeDisposable()
@@ -67,8 +68,21 @@ class GameController : Controller(), NativeKeyListener {
         player1.item = Player(messages["title_player1"])
         player2.item = Player(messages["title_player2"])
 
-        GlobalScreen.addNativeKeyListener(this)
+        initializeKeyboardAsBuzzers()
         initializeGamepadsAsBuzzers()
+    }
+
+    private fun initializeKeyboardAsBuzzers() {
+        keyboardController.setKeyboardListener(object : KeyboardListener {
+            override fun onKeyPressed(event: KeyEvent) {
+                val player = when (event.keyCode to event.keyLocation) {
+                    KeyEvent.VK_CONTROL to KeyEvent.KEY_LOCATION_LEFT -> player1.item
+                    KeyEvent.VK_CONTROL to KeyEvent.KEY_LOCATION_RIGHT -> player2.item
+                    else -> null
+                }
+                player?.run { onGameEvent(GameEvent.Buzzer(this)) }
+            }
+        })
     }
 
     private fun initializeGamepadsAsBuzzers() {
@@ -93,21 +107,11 @@ class GameController : Controller(), NativeKeyListener {
         devices.getOrNull(1)?.run { initializeGamepadAsBuzzer(this, player2.item) }
     }
 
-    override fun nativeKeyTyped(p0: NativeKeyEvent) = Unit
-
-    override fun nativeKeyPressed(event: NativeKeyEvent) = when (event.keyCode to event.keyLocation) {
-        NativeKeyEvent.VC_CONTROL to NativeKeyEvent.KEY_LOCATION_LEFT -> runLater { onBuzzerEvent(player1.item) }
-        NativeKeyEvent.VC_CONTROL to NativeKeyEvent.KEY_LOCATION_RIGHT -> runLater { onBuzzerEvent(player2.item) }
-        else -> Unit
-    }
-
-    override fun nativeKeyReleased(p0: NativeKeyEvent) = Unit
-
     fun onGameEvent(event: GameEvent) = when (event) {
         is GameEvent.Buzzer -> onBuzzerEvent(event.player)
         is GameEvent.NewPictures -> onNewPicturesEvent(event.filePaths)
-        is GameEvent.PictureSelect -> onNewPictureEvent(event.filePath)
         GameEvent.Pause -> onPauseEvent()
+        is GameEvent.PictureSelect -> onNewPictureEvent(event.filePath)
         GameEvent.Reveal -> onRevealEvent()
         is GameEvent.ScoreDown -> onScoreDownEvent(event.player)
         is GameEvent.ScoreUp -> onScoreUpEvent(event.player)

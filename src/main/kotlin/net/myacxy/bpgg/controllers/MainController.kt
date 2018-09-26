@@ -14,6 +14,7 @@ class MainController : Controller() {
     private val settingsController: SettingsController by inject()
 
     private val mainView: MainView by inject()
+
     private val presentationScope = Scope()
 
     fun choosePictures() {
