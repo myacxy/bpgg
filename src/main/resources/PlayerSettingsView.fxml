@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      spacing="8.0"
+      xmlns="http://javafx.com/javafx">
+    <children>
+        <Label fx:id="title"
+               styleClass="title" />
+
+        <VBox spacing="4.0">
+            <children>
+                <Label styleClass="subhead"
+                       text="%title_name" />
+                <JFXTextField fx:id="name"
+                              styleClass="body1" />
+            </children>
+        </VBox>
+    </children>
+</VBox>

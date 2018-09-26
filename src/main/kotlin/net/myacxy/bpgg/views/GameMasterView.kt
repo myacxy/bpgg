@@ -21,7 +21,6 @@ class GameMasterView : View() {
     private val iconFactory = MaterialDesignIconFactory.get()
 
     //<editor-fold desc="player1">
-    private val tfName1: JFXTextField by fxid("name1")
     private val tfScore1: JFXTextField by fxid("score1")
     private val btnScore1Up: JFXButton by fxid("score1_up")
     private val btnScore1Down: JFXButton by fxid("score1_down")
@@ -29,7 +28,6 @@ class GameMasterView : View() {
 
     init {
         with(gameController.player1) {
-            tfName1.textProperty().bindBidirectional(name)
             tfScore1.textProperty().bindBidirectional(score, IntegerStringConverter())
             btnScore1Up.apply {
                 graphic = iconFactory.createIcon(MaterialDesignIcon.PLUS, "24")
@@ -48,7 +46,6 @@ class GameMasterView : View() {
     //</editor-fold>
 
     //<editor-fold desc="player2">
-    private val tfName2: JFXTextField by fxid("name2")
     private val tfScore2: JFXTextField by fxid("score2")
     private val btnScore2Up: JFXButton by fxid("score2_up")
     private val btnScore2Down: JFXButton by fxid("score2_down")
@@ -56,7 +53,6 @@ class GameMasterView : View() {
 
     init {
         with(gameController.player2) {
-            tfName2.textProperty().bindBidirectional(name)
             tfScore2.textProperty().bindBidirectional(score, IntegerStringConverter())
             btnScore2Up.apply {
                 graphic = iconFactory.createIcon(MaterialDesignIcon.PLUS, "24")

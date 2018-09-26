@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXDecorator
 import javafx.scene.Scene
 import javafx.stage.Stage
 import net.myacxy.bpgg.models.GameEvent
+import net.myacxy.bpgg.models.PlayerScope
 import net.myacxy.bpgg.views.MainView
 import net.myacxy.bpgg.views.PresentationView
 import tornadofx.*
@@ -16,6 +17,9 @@ class MainController : Controller() {
     private val mainView: MainView by inject()
 
     private val presentationScope = Scope()
+
+    val player1Scope = PlayerScope(messages["title_player1"], gameController.player1)
+    val player2Scope = PlayerScope(messages["title_player2"], gameController.player2)
 
     fun choosePictures() {
         val filePaths = settingsController.choosePictures()

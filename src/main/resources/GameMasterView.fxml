@@ -4,7 +4,7 @@
 <?import com.jfoenix.validation.IntegerValidator?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             prefWidth="600.0"
@@ -53,19 +53,6 @@
                     <children>
                         <Label styleClass="title"
                                text="%title_player1" />
-                        <VBox spacing="4.0">
-                            <children>
-                                <Label styleClass="subhead"
-                                       text="%title_name" />
-                                <JFXTextField fx:id="name1"
-                                              styleClass="body1"
-                                              text="Player1">
-                                    <VBox.margin>
-                                        <Insets right="56.0" />
-                                    </VBox.margin>
-                                </JFXTextField>
-                            </children>
-                        </VBox>
                         <VBox spacing="4.0">
                             <children>
                                 <Label styleClass="subhead"
@@ -121,19 +108,6 @@
                     <children>
                         <Label styleClass="title"
                                text="%title_player2" />
-                        <VBox spacing="4.0">
-                            <children>
-                                <Label styleClass="subhead"
-                                       text="%title_name" />
-                                <JFXTextField fx:id="name2"
-                                              styleClass="body1"
-                                              text="Player2">
-                                    <VBox.margin>
-                                        <Insets right="56.0" />
-                                    </VBox.margin>
-                                </JFXTextField>
-                            </children>
-                        </VBox>
                         <VBox spacing="4.0">
                             <children>
                                 <Label styleClass="subhead"

@@ -157,7 +157,7 @@
 .settings-menu {
     -fx-pref-width: 256px;
     -fx-padding: 16px;
-    -fx-spacing: 8px;
+    -fx-spacing: 16px;
     -fx-background-color: -color-surface;
 }
 

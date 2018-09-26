@@ -7,6 +7,7 @@ import de.jensd.fx.glyphs.materialdesignicons.utils.MaterialDesignIconFactory
 import javafx.scene.layout.VBox
 import javafx.util.converter.NumberStringConverter
 import net.myacxy.bpgg.controllers.GameController
+import net.myacxy.bpgg.controllers.MainController
 import net.myacxy.bpgg.controllers.SettingsController
 import tornadofx.*
 
@@ -14,9 +15,9 @@ class SettingsView : View() {
 
     override val root: VBox by fxml("/SettingsView.fxml")
 
+    private val mainController: MainController by inject()
     private val settingsController: SettingsController by inject()
     private val gameController: GameController by inject()
-    private val iconFactory = MaterialDesignIconFactory.get()
 
     private val tfUnblurDuration: JFXTextField by fxid("unblur_duration")
     private val btnUnblurDurationUp: JFXButton by fxid("unblur_duration_up")
@@ -29,6 +30,11 @@ class SettingsView : View() {
     private val tfMaximumBlur: JFXTextField by fxid("max_blur")
     private val btnMaximumBlurUp: JFXButton by fxid("max_blur_up")
     private val btnMaximumBlurDown: JFXButton by fxid("max_blur_down")
+
+    private val settingsPlayer1: PlayerSettingsView by inject(mainController.player1Scope)
+    private val settingsPlayer2: PlayerSettingsView by inject(mainController.player2Scope)
+
+    private val iconFactory = MaterialDesignIconFactory.get()
 
     init {
         root.disableProperty().bind(gameController.isInProgressProperty)
@@ -62,6 +68,9 @@ class SettingsView : View() {
             graphic = iconFactory.createIcon(MaterialDesignIcon.MINUS, "24")
             action { settingsController.maximumBlur -= 1 }
         }
+
+        root += settingsPlayer1
+        root += settingsPlayer2
     }
 
 }

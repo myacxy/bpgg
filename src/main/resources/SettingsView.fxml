@@ -9,11 +9,11 @@
       xmlns="http://javafx.com/javafx"
       styleClass="settings-menu">
 
-    <Label text="%title_picture"
-           styleClass="title" />
-
     <VBox spacing="8.0">
         <children>
+            <Label text="%title_picture"
+                   styleClass="title" />
+
             <VBox spacing="4.0">
                 <children>
                     <Label text="%title_unblur_duration"
