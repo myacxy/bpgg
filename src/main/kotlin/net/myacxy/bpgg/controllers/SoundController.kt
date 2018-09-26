@@ -17,22 +17,19 @@ class SoundController : Controller() {
     val isIntroMusicPlayingProperty = SimpleBooleanProperty(false)
     var isIntroMusicPlaying by isIntroMusicPlayingProperty
 
-    private val background: Clip = AudioSystem.getClip()
-    private val beep: AudioClip
-    private val boop: AudioClip
-    private val intro: Clip = AudioSystem.getClip()
-
-    init {
-        background.apply {
+    private val background by lazy {
+        return@lazy AudioSystem.getClip().apply {
             val ais = BufferedInputStream(resources.stream("/sounds/background.wav"))
             open(AudioSystem.getAudioInputStream(ais))
             addLineListener { isBackgroundMusicPlaying = it.type == LineEvent.Type.START }
             val gainControl = getControl(FloatControl.Type.MASTER_GAIN) as FloatControl
             gainControl.value = -15f
         }
-        beep = AudioClip(resources["/sounds/beep.wav"])
-        boop = AudioClip(resources["/sounds/boop.wav"])
-        intro.apply {
+    }
+    private val beep by lazy { AudioClip(resources["/sounds/beep.wav"]) }
+    private val boop by lazy { AudioClip(resources["/sounds/boop.wav"]) }
+    private val intro by lazy {
+        return@lazy AudioSystem.getClip().apply {
             val ais = BufferedInputStream(resources.stream("/sounds/intro.wav"))
             open(AudioSystem.getAudioInputStream(ais))
             addLineListener { isIntroMusicPlaying = it.type == LineEvent.Type.START }
@@ -49,12 +46,9 @@ class SoundController : Controller() {
         else -> intro.apply { framePosition = 0 }.run { start() }
     }
 
-    fun playBeep() {
-        beep.play()
-    }
-
-    fun playBoop() {
-        boop.play()
+    fun playCountdown(current: Int) = when (current) {
+        0 -> boop.play()
+        else -> beep.play()
     }
 
 }

@@ -166,16 +166,12 @@ class GameController : Controller() {
         player.countdown = countdownStart
 
         countdownDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
-                .takeUntil { player.countdown < 2 }
+                .takeWhile { player.countdown > 0 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(JavaFxScheduler.platform())
                 .subscribeBy(onNext = {
-                    if (player.countdown > 1) {
-                        soundController.playBeep()
-                    }
                     player.countdown -= 1
-                }, onComplete = {
-                    soundController.playBoop()
+                    soundController.playCountdown(player.countdown)
                 }, onError = {
                     it.printStackTrace()
                 })
