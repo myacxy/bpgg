@@ -78,19 +78,20 @@
 *                                                                              *
 *******************************************************************************/
 
-.button:hover, .jfx-toggle-node:hover {
+.button:hover,
+.jfx-toggle-node:hover {
     -fx-cursor: HAND;
 }
 
-.button:hover > .text {
-    -fx-opacity: -opacity-medium;
-}
-
+.button:hover > .text,
 .button:hover > .glyph-icon {
     -fx-opacity: -opacity-medium;
 }
 
-.button-contained, .button-contained-icon, button-outlined, .button-text {
+.button-contained,
+.button-contained-icon,
+.button-outlined,
+.button-text {
     -fx-min-width: 64px;
     -fx-min-height: 36px;
     -fx-padding: 0px 16px 0px 16px;
@@ -128,19 +129,24 @@
     -fx-text-fill: -color-secondary;
 }
 
-.button-contained, .button-contained-icon {
+.button-contained,
+.button-contained-icon {
    -jfx-button-type: RAISED;
 }
 
-.button-contained, .button-contained-icon .jfx-rippler {
+.button-contained .jfx-rippler,
+.button-contained-icon .jfx-rippler, {
    -jfx-rippler-fill: -color-on-secondary;
 }
 
-.button-icon, .jfx-toggle-node .jfx-rippler {
+.button-icon .jfx-rippler,
+.button-outlined .jfx-rippler,
+.jfx-toggle-node .jfx-rippler {
    -jfx-rippler-fill: -color-secondary;
 }
 
-.button-contained, .button-contained-icon .glyph-icon {
+.button-contained-icon .glyph-icon,
+.button-contained .glyph-icon {
    -fx-fill: -color-on-secondary;
 }
 
