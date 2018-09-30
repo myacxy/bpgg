@@ -1,6 +1,15 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.2.61'
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.61'
+    }
 }
+
+apply plugin: 'kotlin'
 
 version '0.1'
 

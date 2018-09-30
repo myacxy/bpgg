@@ -1,24 +1,16 @@
 package net.myacxy.bpgg.controllers
 
-import com.ivan.xinput.XInputDevice14
-import com.ivan.xinput.enums.XInputButton
-import com.ivan.xinput.listener.SimpleXInputDeviceListener
 import io.reactivex.Observable
 import io.reactivex.Observable.intervalRange
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxjavafx.schedulers.JavaFxScheduler
-import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javafx.beans.binding.BooleanBinding
 import javafx.beans.property.*
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
-import net.myacxy.bpgg.models.GameEvent
-import net.myacxy.bpgg.models.KeyboardListener
-import net.myacxy.bpgg.models.Player
-import net.myacxy.bpgg.models.PlayerModel
+import net.myacxy.bpgg.models.*
 import tornadofx.*
 import java.awt.event.KeyEvent
 import java.util.concurrent.TimeUnit
@@ -58,11 +50,11 @@ class GameController : Controller() {
     val countdownStart = 5
 
     private val keyboardController: KeyboardController by inject()
+    private val gamepadController: GamepadController by inject()
     private val soundController: SoundController by inject()
 
     private var progressDisposable: Disposable? = null
     private var countdownDisposable: Disposable? = null
-    private val controllerDisposables = CompositeDisposable()
 
     init {
         player1.item = Player(messages["title_player1"])
@@ -86,25 +78,15 @@ class GameController : Controller() {
     }
 
     private fun initializeGamepadsAsBuzzers() {
-
-        fun initializeGamepadAsBuzzer(device: XInputDevice14, player: Player) {
-
-            device.addListener(object : SimpleXInputDeviceListener() {
-                override fun buttonChanged(button: XInputButton, pressed: Boolean) {
-                    onBuzzerEvent(player)
+        gamepadController.initialize()
+        gamepadController.gamepadListener = object : GamepadListener {
+            override fun onAnyButtonPressed(index: Int) {
+                when (index) {
+                    0 -> onGameEvent(GameEvent.Buzzer(player1.item))
+                    1 -> onGameEvent(GameEvent.Buzzer(player2.item))
                 }
-            })
-
-            controllerDisposables += Observable.interval(0, 17L, TimeUnit.MILLISECONDS)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(JavaFxScheduler.platform())
-                    .doOnNext { device.poll() }
-                    .subscribeBy(onError = { it.printStackTrace() })
+            }
         }
-
-        val devices = XInputDevice14.getAllDevices().filter { it.gamepadCapabilities != null }
-        devices.getOrNull(0)?.run { initializeGamepadAsBuzzer(this, player1.item) }
-        devices.getOrNull(1)?.run { initializeGamepadAsBuzzer(this, player2.item) }
     }
 
     fun onGameEvent(event: GameEvent) = when (event) {
